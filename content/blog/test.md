@@ -1,7 +1,7 @@
 ---
-title: "Sample Blog Post"
-date: 2024-03-14T12:00:00.000Z
-description: "This is a sample blog post using Decap and Nuxt with Vue 3."
+title: "My First Blog Post"
+description: "This is my first post using Nuxt Content"
+date: "2024-03-14"
 slug: "test"
 ---
 

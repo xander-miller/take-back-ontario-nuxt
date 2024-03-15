@@ -1,24 +1,16 @@
 <template>
   <div>
-    Posts
+    <h1>Blog</h1>
     <ul>
       <li v-for="post in posts" :key="post.slug">
-        <NuxtLink :to="'/blog/' + post.slug">{{ post.title }}</NuxtLink>
+        <NuxtLink :to="`/blog/${post.slug}`">{{ post.title }}</NuxtLink>
       </li>
     </ul>
   </div>
 </template>
 
-<script setup>
-import { useAsyncData } from '#imports';
+<script setup lang="ts">
+import { useAsyncData } from 'nuxt/app'
 
-const { data: posts } = useAsyncData('posts', async () => {
-  // Assuming you are using @nuxt/content module
-  const data = await useContent('blog').find();
-  console.log({ data })
-  return data.map(post => ({
-    title: post.title,
-    slug: post.slug
-  }));
-});
+const { data: posts } = await useAsyncData('posts-list', () => queryContent('/blog').only(['title', 'slug']).find())
 </script>

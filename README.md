@@ -1,24 +1,21 @@
-# Nuxt 3 Minimal Starter
+# Take Back Ontario Nuxt
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
+## Stack
+* [Nuxt 3](https://nuxt.com/docs/getting-started/introduction)
+* [Vue 3 with composition API](https://vuejs.org/guide/extras/composition-api-faq.html)
+* [Netfliy - including Cloud Functions](https://docs.netlify.com/cli/get-started/)
+* [Neo4j Graph Database](https://neo4j.com/)
+* [Optional GraphQL](https://graphql.org/)
+* [Decap CMS for content management in git](https://decapcms.org/)
 ## Setup
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+make sure you have netlify cli installed globally
+```Bash
+npm install netlify-cli -g
 ```
+[Get the MDC - Markdown Components VScode extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc)
+[Get the Nuxt Assistant Chrome extension](https://chromewebstore.google.com/detail/nuxt-assistant/nebkdnlhchcbbjpgfmhifafhfjipphgi)
+[Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
 ## Development Server
 
@@ -27,49 +24,22 @@ Start the development server on `http://localhost:3000`:
 ```bash
 # npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
+How to call the neo4j db with graphql
 
-## Production
+```javascript
+const { Neo4jGraphQL } = require("@neo4j/graphql");
+const { ApolloServer } = require("apollo-server");
 
-Build the application for production:
+const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
 
-```bash
-# npm
-npm run build
+const server = new ApolloServer({
+    schema: neoSchema.schema,
+    context: ({ req }) => ({ req }),
+});
 
-# pnpm
-pnpm run build
+server.listen().then(({ url }) => {
+    console.log(`GraphQL server ready at ${url}`);
+});
 
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

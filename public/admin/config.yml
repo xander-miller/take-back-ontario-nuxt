@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: master # Branch to update (optional; defaults to master)
 
-media_folder: static/img
+media_folder: public/img
 public_folder: /img
 
 collections:
@@ -11,11 +11,11 @@ collections:
     folder: 'content/blog'
     format: 'frontmatter'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     editor:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Description', name: 'description', widget: 'string' }
+      - {label: "Featured Image", name: "image", widget: "image"}
       - { label: 'Body', name: 'body', widget: 'markdown' }

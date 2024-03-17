@@ -25,3 +25,7 @@ logs
 
 # Local Netlify folder
 .netlify
+
+
+# swp files from vim
+*.swp

@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
 
   // Global CSS
-  css: ["~/assets/css/tailwind.css"],
+  css: ["~/assets/css/tailwind.css", "~/assets/css/main.css"],
 
   // PostCSS Configuration - Moved inside the build configuration
   build: {

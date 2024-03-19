@@ -1,11 +1,10 @@
 <template>
-<NuxtLayout>
-  THE BLOG SLUG
-  <ContentDoc />
-</NuxtLayout>
+  <div>
+    <NuxtLayout name="blog">
+      THE BLOG SLUG
+      <ContentDoc />
+    </NuxtLayout>
+  </div>
 </template>
 <script setup>
-definePageMeta({
-  layout: 'blog'
-})
 </script>

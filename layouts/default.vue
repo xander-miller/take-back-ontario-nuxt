@@ -1,10 +1,12 @@
 <template>
-	<TopBar />
-	<QueensParkImage />
-	<h1 v-if="page">{{ page.title }}</h1>
-	<main class="main-content">
-		<slot></slot>
-	</main>
+  <TopBar />
+  <QueensParkImage />
+  <h1 v-if="page">
+    {{ page.title }}
+  </h1>
+  <main class="main-content">
+    <slot />
+  </main>
 </template>
 <script setup>
 const { page } = useContent()

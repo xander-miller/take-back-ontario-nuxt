@@ -1,6 +1,11 @@
 <template>
   <div class="top-bar">
-    <img @click="backToHome" src="/img/tbo-logo.webp" alt="Take Back Ontario Logo" class="subpage-logo" />
+    <img
+      src="/img/tbo-logo.webp"
+      alt="Take Back Ontario Logo"
+      class="subpage-logo"
+      @click="backToHome"
+    >
   </div>
 </template>
 

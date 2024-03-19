@@ -3,16 +3,27 @@
     <NuxtLayout>
       <h1>Blog</h1>
       <ul>
-        <li v-for="post in posts" :key="post.slug">
-          <NuxtLink :to="`/blog/${post.slug}`">{{ post.title }}</NuxtLink>
+        <li
+          v-for="post in posts"
+          :key="post.slug"
+        >
+          <NuxtLink :to="`/blog/${post.slug}`">
+            {{ post.title }}
+          </NuxtLink>
         </li>
       </ul>
     </NuxtLayout>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" async>
 import { useAsyncData } from 'nuxt/app'
-
-const { data: posts } = await useAsyncData('posts-list', () => queryContent('/blog').only(['title', 'slug']).find())
+export default {
+  async setup() {
+    const { data: posts } = await useAsyncData('posts-list', () => queryContent('/blog').only(['title', 'slug']).find())
+    return {
+      posts,
+    }
+  }
+}
 </script>

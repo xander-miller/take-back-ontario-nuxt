@@ -3,7 +3,11 @@
 
 
 <template>
-  <img src="/img/queens-park-background.jpg" alt="Queen's Park Background" class="qp-background" />
+  <img
+    src="/img/queens-park-background.jpg"
+    alt="Queen's Park Background"
+    class="qp-background"
+  >
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@
 title: "Events"
 description: "meta description of the page"
 ---
+# Events
 
 ## Weekly Zoom Meetings
 
@@ -9,8 +10,7 @@ Weekly Zoom meetings are held every Wednesday at 7:00pm. These meetings are host
 
 Sign up at the "Join Us" link below to receive the Zoom link for these meetings.
 
-(Join Us)[]
-
+[Join Us](https://signup.takebackontario.ca)
 ## In-person Meetings
 
 Stay tuned! As we collect a membership list with postal codes, we will be able to send introduction emails to members who are geographically close to one another. Members can then organize in-person meetings in their area.

@@ -1,26 +1,31 @@
 <template>
   <div>
     <NuxtLayout>
-      <h1>Netlify Identity</h1>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="openModal">Open
-        Modal</button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="goToBlogPage">Go to
-        Blog</button>
+      <div v-if="isAuthenticated">
+        <h1>Netlify Identity</h1>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="openModal">Open
+          Modal</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="goToBlogPage">Go to
+          Blog</button>
+        </div>
+        <img src="/img/tbo-logo.webp" />
       <ContentDoc />
+      <div class="buttons">
+        <button @click="goToPage('about')" class="btn my-8">Learn&nbsp;More</button>
+        <button @click="goToPage('events')" class="btn my-8" href="/events">Events</button>
+        <button @click="goToPage('resources')" class="btn my-8" href="/resources">Resources</button>
+        <a class="btn my-8" href="https://signup.takebackontario.ca">Join&nbsp;Us</a>
+      </div>
     </NuxtLayout>
-    <div class="buttons">
-      <button @click="goToPage('about')" class="btn my-8">Learn&nbsp;More</button>
-      <button @click="goToPage('events')" class="btn my-8" href="/events">Events</button>
-      <button @click="goToPage('resources')" class="btn my-8" href="/resources">Resources</button>
-      <a class="btn my-8" href="https://signup.takebackontario.ca">Join&nbsp;Us</a>
-    </div>
   </div>
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
 const router = useRouter();
+// import tboLogo from '~/assets/tbo-logo.png';
 
 useHead({
+  title: "Home",
   script: [
     { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
   ],
@@ -45,6 +50,10 @@ const goToPage = (page) => {
 <style scoped>
 .buttons {
   display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: 800px;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;

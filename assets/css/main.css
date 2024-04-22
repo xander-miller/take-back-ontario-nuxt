@@ -66,3 +66,8 @@ li {
 li:last-child {
   margin-bottom: 0;
 }
+
+#its-your-province-take-it-back {
+  margin-top: 60px;
+  text-align: center;
+}

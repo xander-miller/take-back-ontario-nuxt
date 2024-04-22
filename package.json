@@ -12,10 +12,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^4.2.5",
     "@neo4j/graphql": "^5.2.0",
     "@neo4j/graphql-ogm": "^5.2.0",
     "@nuxt/content": "^2.12.1",
     "@tailwindcss/typography": "^0.5.10",
+    "aws-amplify": "^6.0.28",
     "neo4j-driver": "^5.18.0",
     "nuxt": "^3.10.3",
     "path": "^0.12.7",

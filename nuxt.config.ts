@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       exclude: ['fsevents']
+    },
+    define: {
+      'window.global': {}
     }
   },
   content: {
@@ -49,4 +52,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: "netlify",
   },
+
+  alias: {
+    './runtimeConfig': './runtimeConfig.browse'
+  }
 });

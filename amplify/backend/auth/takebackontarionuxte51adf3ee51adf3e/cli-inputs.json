@@ -1,16 +1,16 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "takebackontarionuxt7b5969ab_identitypool_7b5969ab",
+    "identityPoolName": "takebackontarionuxte51adf3e_identitypool_e51adf3e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "takeba7b5969ab",
-    "userPoolName": "takebackontarionuxt7b5969ab_userpool_7b5969ab",
+    "resourceNameTruncated": "takebae51adf3e",
+    "userPoolName": "takebackontarionuxte51adf3e_userpool_e51adf3e",
     "autoVerifiedAttributes": [
       "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-      "SMS Text Message"
+      "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -31,16 +31,20 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "takeba7b5969ab_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "takebae51adf3e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "7b5969ab",
-    "resourceName": "takebackontarionuxt7b5969ab",
+    "sharedId": "e51adf3e",
+    "resourceName": "takebackontarionuxte51adf3ee51adf3e",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "useDefault": "manual",
+    "thirdPartyAuth": false,
     "usernameAttributes": [
       "email"
     ],
+    "userPoolGroups": false,
+    "adminQueries": false,
     "triggers": {},
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

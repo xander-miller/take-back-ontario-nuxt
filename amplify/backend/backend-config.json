@@ -1,12 +1,12 @@
 {
   "auth": {
-    "takebackontarionuxt7b5969ab": {
+    "takebackontarionuxte51adf3ee51adf3e": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
+        "mfaConfiguration": "OPTIONAL",
         "mfaTypes": [
-          "SMS"
+          "TOTP"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [],

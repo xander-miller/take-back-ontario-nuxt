@@ -1,13 +1,15 @@
 <template>
-	<NuxtLayout>
-		<authenticator :initial-state="intialAuthState">
-			<template v-slot="{ user, signOut }">
-				<h1>Hello {{ user.username }}!</h1>
-				<p>You are signed in!</p>
-				<button @click="signOut">Sign Out</button>
-			</template>
-		</authenticator>
-	</NuxtLayout>
+  <NuxtLayout>
+    <authenticator :initial-state="intialAuthState">
+      <template #default="{ user, signOut }">
+        <h1>Hello {{ user.username }}!</h1>
+        <p>You are signed in!</p>
+        <button @click="signOut">
+          Sign Out
+        </button>
+      </template>
+    </authenticator>
+  </NuxtLayout>
 </template>
 <script setup>
 import { Authenticator } from "@aws-amplify/ui-vue";

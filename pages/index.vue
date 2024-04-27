@@ -11,15 +11,22 @@
         Blog
       </button>
       <ContentDoc />
+      <div class="buttons">
+        <button @click="goToPage('about')" class="btn my-8">Learn&nbsp;More</button>
+        <button @click="goToPage('events')" class="btn my-8" href="/events">Events</button>
+        <button @click="goToPage('resources')" class="btn my-8" href="/resources">Resources</button>
+        <a class="btn my-8" href="https://signup.takebackontario.ca">Join&nbsp;Us</a>
+      </div>
     </NuxtLayout>
-
   </div>
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
 const router = useRouter();
+// import tboLogo from '~/assets/tbo-logo.png';
 
 useHead({
+  title: "Home",
   script: [
     { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
   ],
@@ -44,6 +51,10 @@ const goToPage = (page) => {
 <style scoped>
 .buttons {
   display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: 800px;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;

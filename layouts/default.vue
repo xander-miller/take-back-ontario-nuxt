@@ -10,6 +10,7 @@
   </main>
 </template>
 <script setup>
+
 const { page } = useContent()
 </script>
 

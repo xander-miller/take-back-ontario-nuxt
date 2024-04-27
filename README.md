@@ -21,45 +21,25 @@ npm install netlify-cli -g
 
 1. Install the [amplify cli](https://docs.amplify.aws/javascript/start/getting-started/installation/)
 
-2. Follow the [amplify setup instruction](https://docs.amplify.aws/javascript/build-a-backend/auth/set-up-auth/)
-  * Use the following settings:
-    * Pick the `Manual` config
-    * Pick the `User Sign-Up, Sign-In, connected with AWS IAM controls`
-    * Pick the default friendly name
-    * Pick the default identity pool name
-    * Pick `No` for unauthenticated logins
-    * Pick `No` for 3rd party auth providers
-    * Pick the default name for the user pool
-    * Select `Email` for how you want users to sign in
-    * Select `No` for adding user pool groups
-    * Select `No` for adding an admin queries API
-    * Select `OPTIONAL (Individual users can use MFA)` 
-    * Select only `Time-Based One-Time Password (TOTP)` 
-    * Select the default authentication message
-    * Select `Enabled (Requires per-user email entry at registration)` for the email base user registration/forgot password
-    * Select the default email verification subject
-    * Select the default email verification message 
-    * Select the default password policy
-    * Select `Email`for the required sign up attributes
-    * Select the default refresh token expiration
-    * Select `N` for the user attributes this app can read and write
-    * Don't select any extra capabilities
-    * Select `No` to using an OAuth flow
-    * Select `No` for lambda triggers in cognito
+2. Install the [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-3. You can the run `amplify push`
-4. The next time you run `npm run dev` you should be able to use your auth flow
+3. Login to the aws console
 
+4. Navigate to the [Security credentials for your account](https://us-east-1.console.aws.amazon.com/iam/home#/security_credentials?section=IAM_credentials)
 
+5. Create an access key
+  - it should be `CLI` (you must also check off the `i understand the above....`)
+  - give it a description
+  - keep this access key secret page open, you will need the secrets in the next step
+  
+6. run `aws configure`
+  - copy the access key and secret access key into the  aws configure inputs.
 
+7. Pull your configuration `amplify pull`
+8. Select the profile you just created (likely just `default`) 
+9. Select the `dev` amplify environment
 
-
-
-
-
-
-
-
+9. The next time you run `npm run dev` the app will be using the `dev` environment to do auth
 
 ## Development Server
 

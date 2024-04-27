@@ -28,6 +28,7 @@ jobs:
         cache: 'npm'
     - run: npm ci 
     - run: npm run lint-build
+    - run: pwd ; ls -l
     - run: echo "{}" > src/amplifyconfiguration.json # create a blank config to make the build happy
     - run: npm run build
     

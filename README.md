@@ -7,6 +7,7 @@
 * [Neo4j Graph Database](https://neo4j.com/)
 * [Optional GraphQL](https://graphql.org/)
 * [Decap CMS for content management in git](https://decapcms.org/)
+* [AWS Amplify for Cognito authentication](https://docs.amplify.aws/javascript/start)
 ## Setup
 
 ### General 
@@ -15,7 +16,9 @@ make sure you have netlify cli installed globally
 npm install netlify-cli -g
 ```
 [Get the MDC - Markdown Components VScode extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc)
+
 [Get the Nuxt Assistant Chrome extension](https://chromewebstore.google.com/detail/nuxt-assistant/nebkdnlhchcbbjpgfmhifafhfjipphgi)
+
 [Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 ### Amplify
 

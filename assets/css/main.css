@@ -1,3 +1,5 @@
+@import '/node_modules/flowbite-vue/dist/index.css';
+
 html {
   background: #e9e9ea;
 }

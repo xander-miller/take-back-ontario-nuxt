@@ -1,23 +1,27 @@
 <template>
   <NuxtLayout>
-    <authenticator :initial-state="intialAuthState">
-      <template #default="{ user, signOut }">
-        <h1>Hello {{ user.username }}!</h1>
-        <p>You are signed in!</p>
-        <button @click="signOut">
-          Sign Out
-        </button>
-      </template>
-    </authenticator>
+    <div>
+      <fwb-dropdown class="dropdown-button" text="Click me" placement="top">
+        <fwb-list-group>
+          <fwb-list-group-item>Item #1</fwb-list-group-item>
+          <fwb-list-group-item>Item #2</fwb-list-group-item>
+          <fwb-list-group-item>Item #3</fwb-list-group-item>
+        </fwb-list-group>
+      </fwb-dropdown>
+      <fwb-input placeholder="enter your first name" label="First name" />
+    </div>
   </NuxtLayout>
 </template>
 <script setup>
-import { Authenticator } from "@aws-amplify/ui-vue";
-import "@aws-amplify/ui-vue/styles.css";
-import { useRoute } from 'vue-router';
-const route = useRoute()
-
-var intialAuthState = route.query.type == 'signIn' ? 'signIn' : 'signUp';
+// https://flowbite-vue.com/pages/getting-started
+import { FwbDropdown, FwbListGroup, FwbListGroupItem, FwbInput } from 'flowbite-vue'
 </script>
 
-<style scoped></style>
+<style>
+/* .dropdown-button button {
+  background-color: rgb(181 53 44 / var(--tw-bg-opacity));
+}
+.dropdown-button button:hover {
+  background-color: red;
+} */
+</style>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindTypography from '@tailwindcss/typography'
+import flowbite from 'flowbite/plugin';
 
 const path = require('path');
 
@@ -10,6 +11,9 @@ module.exports = {
 theme: {
   extend:{
     colors:{
+      blue: {
+        700: '#3893C5'
+      },
       tboBlue: {
         DEFAULT: '#3893C5',
         50: '#C6E0EF',
@@ -44,8 +48,10 @@ theme: {
   corePlugins: {
     preflight: true,
   },
-  plugins: [tailwindTypography],
+  plugins: [tailwindTypography, flowbite],
   content: [
+    'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',
+    'node_modules/flowbite/**/*.{js,jsx,ts,tsx}',
     'components/**/*.{vue,js,ts}',
     'layouts/**/*.vue',
     'pages/**/*.vue',

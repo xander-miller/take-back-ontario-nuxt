@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  neo4j:
+    image: neo4j:5.19.0-community
+    ports:
+      - 7888:7474
+      - 7999:7687
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    volumes:
+      - ./db/data:/data
+      - ./db/conf:/conf
+      - ./db/logs:/logs
+      - ./db/plugins:/plugins
+    healthcheck:
+      test: wget http://localhost:7474 || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 20
+      start_period: 3s

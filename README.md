@@ -20,6 +20,10 @@ npm install netlify-cli -g
 [Get the Nuxt Assistant Chrome extension](https://chromewebstore.google.com/detail/nuxt-assistant/nebkdnlhchcbbjpgfmhifafhfjipphgi)
 
 [Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+### Docker
+- Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running.
+
 ### Amplify
 
 1. Install the [amplify cli](https://docs.amplify.aws/javascript/start/getting-started/installation/)
@@ -44,7 +48,14 @@ npm install netlify-cli -g
 
 9. The next time you run `npm run dev` the app will be using the `dev` environment to do auth
 
-## Development Server
+## Development 
+
+Before starting the dev server you must spin up the development neo4j server using docker-compose.
+```bash
+# Keep this running in another terminal
+docker-compose up
+```
+
 
 Start the development server on `http://localhost:3000`:
 
@@ -52,21 +63,7 @@ Start the development server on `http://localhost:3000`:
 # npm
 npm run dev
 ```
-How to call the neo4j db with graphql
 
-```javascript
-const { Neo4jGraphQL } = require("@neo4j/graphql");
-const { ApolloServer } = require("apollo-server");
+## Neo4j
 
-const neoSchema = new Neo4jGraphQL({ typeDefs, driver });
-
-const server = new ApolloServer({
-    schema: neoSchema.schema,
-    context: ({ req }) => ({ req }),
-});
-
-server.listen().then(({ url }) => {
-    console.log(`GraphQL server ready at ${url}`);
-});
-
-```
+In order to query/mutate neo4j see the [nuxt-neo4j Usage](https://nuxt.com/modules/neo4j#usage) section.

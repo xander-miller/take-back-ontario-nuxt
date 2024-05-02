@@ -19,7 +19,7 @@ npm install netlify-cli -g
 [Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
 ### Docker
-- Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running
+- Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running.
 
 ### Amplify
 

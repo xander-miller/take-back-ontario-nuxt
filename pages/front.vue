@@ -30,7 +30,20 @@
       </div>
     </div>
     <div>
-      <img src="/img/tbo-hero.png" class="tbo-hero" />
+      <img
+        src="/img/tbo-hero.png"
+        class="tbo-hero"
+      >
+    </div>
+    <div class="simple-nav">
+      <a
+        href="/profile"
+        class="front-button"
+      >JOIN</a>
+      <a
+        href="/about"
+        class="front-button"
+      >LEARN MORE</a>
     </div>
   </div>
 </template>
@@ -43,6 +56,21 @@ import CnTowerChevron from '~/components/CnTowerChevron.vue';
 svg {
   width: 100%;
   height: 100%;
+}
+
+.simple-nav {
+  width: 40%;
+  min-width: 300px;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 3%;
+  right: 0px;
+}
+.simple-nav a {
+  line-height: 1em;
+  color: white;
+  font-size: 1.5rem;
 }
 
 .tbo-hero {

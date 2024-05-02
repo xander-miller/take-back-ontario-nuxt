@@ -78,7 +78,7 @@ onMounted(async () => {
   }
 
   console.log('create video event listener');
-  video.addEventListener('canplaythrough', () => {
+  video.addEventListener('canplay', () => {
     draw();
   });
 

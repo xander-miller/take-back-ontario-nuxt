@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-takebackontarionuxt-dev-85ddf-authRole",
+      "UnauthRoleArn": "arn:aws:iam::975050295513:role/amplify-takebackontarionuxt-dev-85ddf-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::975050295513:role/amplify-takebackontarionuxt-dev-85ddf-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-takebackontarionuxt-dev-85ddf-deployment",
+      "UnauthRoleName": "amplify-takebackontarionuxt-dev-85ddf-unauthRole",
+      "StackName": "amplify-takebackontarionuxt-dev-85ddf",
+      "StackId": "arn:aws:cloudformation:us-east-1:975050295513:stack/amplify-takebackontarionuxt-dev-85ddf/fa9b9df0-009e-11ef-b984-127b532a671d",
+      "AmplifyAppId": "d21pakktsa7tjn"
+    },
+    "categories": {
+      "auth": {
+        "takebackontarionuxte51adf3ee51adf3e": {}
+      }
+    }
+  }
+}

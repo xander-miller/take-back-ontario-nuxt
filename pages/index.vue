@@ -1,20 +1,47 @@
 <template>
   <div>
     <NuxtLayout>
-      <div v-if="isAuthenticated">
-        <h1>Netlify Identity</h1>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="openModal">Open
-          Modal</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="goToBlogPage">Go to
-          Blog</button>
-        </div>
-        <img src="/img/tbo-logo.webp" />
+      <h1>Netlify Identity</h1>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="openModal"
+      >
+        Open
+        Modal
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="goToBlogPage"
+      >
+        Go to
+        Blog
+      </button>
       <ContentDoc />
       <div class="buttons">
-        <button @click="goToPage('about')" class="btn my-8">Learn&nbsp;More</button>
-        <button @click="goToPage('events')" class="btn my-8" href="/events">Events</button>
-        <button @click="goToPage('resources')" class="btn my-8" href="/resources">Resources</button>
-        <a class="btn my-8" href="https://signup.takebackontario.ca">Join&nbsp;Us</a>
+        <button
+          class="btn my-8"
+          @click="goToPage('about')"
+        >
+          Learn&nbsp;More
+        </button>
+        <button
+          class="btn my-8"
+          href="/events"
+          @click="goToPage('events')"
+        >
+          Events
+        </button>
+        <button
+          class="btn my-8"
+          href="/resources"
+          @click="goToPage('resources')"
+        >
+          Resources
+        </button>
+        <a
+          class="btn my-8"
+          href="https://signup.takebackontario.ca"
+        >Join&nbsp;Us</a>
       </div>
     </NuxtLayout>
   </div>

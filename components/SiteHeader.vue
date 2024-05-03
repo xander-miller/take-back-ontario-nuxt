@@ -47,12 +47,12 @@
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div
-            v-if="!auth.user"
+            v-if="!user"
             class="hidden sm:ml-6 sm:block"
           >
             <div class="flex space-x-4">
               <SiteHeaderLink
-                href="/profile?type=signIn"
+                href="/profile?signIn"
                 :aria-current="undefined"
                 name="Sign In"
                 :current="false"
@@ -60,12 +60,12 @@
             </div>
           </div>
           <div
-            v-if="!auth.user"
+            v-if="!user"
             class="hidden sm:ml-6 sm:block"
           >
             <div class="flex space-x-4">
               <SiteHeaderLink
-                href="/profile?type=signUp"
+                href="/welcome"
                 name="Sign Up"
               />
             </div>
@@ -74,7 +74,7 @@
 
           <!-- Profile dropdown -->
           <Menu
-            v-if="auth.user"
+            v-if="user"
             as="div"
             class="relative ml-3"
           >
@@ -110,7 +110,7 @@
                   <a
                     href="#"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    @click.prevent="auth.signOut"
+                    @click.prevent="signOut"
                   >Sign out</a>
                 </MenuItem>
               </MenuItems>
@@ -142,7 +142,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue';
 import SiteHeaderLink from './SiteHeaderLink.vue';
-const auth = useAuthenticator();
+const {user, signOut} = toRefs(useAuthenticator());
 const navigation = [
   { name: 'Learn More', href: '/about', current: true },
   { name: 'Events', href: '/events', current: false },

@@ -16,34 +16,40 @@
       </div>
       <CnTowerChevron class="chevron" />
       <div class="blue-triangle">
-        <div style="width: 100%; height: 100%;">
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <polygon
-              points="50,0 100,100 0,100"
-              style="fill: rgba(0, 150, 227, 0.7);"
-            />
-          </svg>
-        </div>
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <polygon
+            points="50,0 100,100 -25,150"
+            style="fill: rgba(0, 150, 227, 0.7);"
+          />
+        </svg>
       </div>
-    </div>
-    <div>
       <img
         src="/img/tbo-hero.png"
         class="tbo-hero"
       >
+      <button class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow">Join Take Back Ontario</button>
     </div>
+    <div />
     <div class="simple-nav">
-      <a
+      <!-- <a
         href="/profile"
         class="front-button"
-      >JOIN</a>
+      >JOIN</a> -->
       <a
         href="/about"
         class="front-button"
-      >LEARN MORE</a>
+      >Log In</a>
+    </div>
+    <div class="page-body-wrapper">
+      <div class="page-body prose-slate prose-xl">
+        <h1 class="prose-h1" style="color:#b42f2b;">What is Take Back Ontario?</h1>
+        <h2 class="prose-h2 m-0" ><strong>Ontario</strong> joins the Canadian <strong>"Take Back"</strong> Movement</h2>
+        <p class="mt-12 mb-0"><strong>Take Back Ontario</strong> is a <strong>citizen-led</strong> organization that <strong>teaches Ontarians</strong> how to take back their political power in our province.</p>
+        <p class="mt-12 mb-0">Take Back Ontario believes that informed citizens leaning into politics with <strong>personal responsibility, discipline and fortitude</strong> will restore <strong>prosperity, freedom</strong> and <strong>order</strong> to our institutions and province.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -53,30 +59,60 @@ import CnTowerChevron from '~/components/CnTowerChevron.vue';
 </script>
 
 <style scoped>
-svg {
+.join-button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+}
+
+.page-body-wrapper {
+  z-index: 0;
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: white;
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  padding: 15% 10%;
+}
+
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
 }
 
 .simple-nav {
   width: 40%;
   min-width: 300px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  padding-right: 20px;
   position: absolute;
-  top: 3%;
+  top: 1%;
   right: 0px;
+  z-index: 100;
 }
+
 .simple-nav a {
   line-height: 1em;
   color: white;
-  font-size: 1.5rem;
 }
 
 .tbo-hero {
   position: absolute;
   width: 100%;
-  top: 10%;
+  top: 7%;
   left: 7%;
   width: 39%;
   height: auto;
@@ -86,21 +122,20 @@ svg {
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: white;
+  z-index: 1;
 }
 
 .hero-container {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 0;
   padding-bottom: 54%;
-  overflow: hidden;
   background-color: white;
+  z-index: 100;
 }
 
 .chevron {
@@ -121,9 +156,12 @@ svg {
 
 .blue-triangle {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   right: 0;
   width: 55%;
   height: 35%;
+}
+.blue-triangle svg {
+  overflow: visible;
 }
 </style>

@@ -30,7 +30,10 @@
         src="/img/tbo-hero.png"
         class="tbo-hero"
       >
-      <button class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow">Join Take Back Ontario</button>
+      <button class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow">
+        Join
+        Take Back Ontario
+      </button>
     </div>
     <div />
     <div class="simple-nav">
@@ -45,10 +48,24 @@
     </div>
     <div class="page-body-wrapper">
       <div class="page-body prose-slate prose-xl">
-        <h1 class="prose-h1" style="color:#b42f2b;">What is Take Back Ontario?</h1>
-        <h2 class="prose-h2 m-0" ><strong>Ontario</strong> joins the Canadian <strong>"Take Back"</strong> Movement</h2>
-        <p class="mt-12 mb-0"><strong>Take Back Ontario</strong> is a <strong>citizen-led</strong> organization that <strong>teaches Ontarians</strong> how to take back their political power in our province.</p>
-        <p class="mt-12 mb-0">Take Back Ontario believes that informed citizens leaning into politics with <strong>personal responsibility, discipline and fortitude</strong> will restore <strong>prosperity, freedom</strong> and <strong>order</strong> to our institutions and province.</p>
+        <h1
+          class="prose-h1"
+          style="color:#b42f2b;"
+        >
+          What is Take Back Ontario?
+        </h1>
+        <h2 class="prose-h2 m-0">
+          <strong>Ontario</strong> joins the Canadian <strong>"Take Back"</strong> Movement
+        </h2>
+        <p class="mt-12 mb-0">
+          <strong>Take Back Ontario</strong> is a <strong>citizen-led</strong> organization that
+          <strong>teaches Ontarians</strong> how to take back their political power in our province.
+        </p>
+        <p class="mt-12 mb-0">
+          Take Back Ontario believes that informed citizens leaning into politics with
+          <strong>personal responsibility, discipline and fortitude</strong> will restore <strong>prosperity,
+            freedom</strong> and <strong>order</strong> to our institutions and province.
+        </p>
       </div>
     </div>
   </div>
@@ -161,6 +178,7 @@ svg {
   width: 55%;
   height: 35%;
 }
+
 .blue-triangle svg {
   overflow: visible;
 }

@@ -2,9 +2,9 @@
 <template>
   <NuxtLayout>
     <TboAuthenticator>
-        <h1>Hello, {{email}}!</h1>
-        <p>This is the onboarding page!</p>
-				<p>You signed up with rerral code: {{ referralCode }}</p>
+      <h1>Hello, {{ email }}!</h1>
+      <p>This is the onboarding page!</p>
+      <p>You signed up with referral code: {{ referralCode }}</p>
     </TboAuthenticator>
   </NuxtLayout>
 </template>
@@ -14,18 +14,16 @@ import { useAuthenticator} from  "@aws-amplify/ui-vue";
 const {route} = toRefs(useAuthenticator());
 var email = ref();
 var referralCode = ref(); 
-console.log('route', route.value);
+
 watch(route, async ()=>{ 
 	console.log('authstate', route.value);
 	if(route.value === 'authenticated'){
-		console.log('fetching attribs');
 	try {
     const userAttributes = await fetchUserAttributes();
-    console.log(userAttributes);
-		email = userAttributes.email;
-		referralCode= userAttributes.referral_code;
+		email.value = userAttributes.email;
+		referralCode.value = userAttributes['custom:referral_code']
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 });

@@ -20,11 +20,11 @@ console.log(signIn, initialAuthState);
 </script>
 
 <template>
-<authenticator
-	:initial-state="initialAuthState"
-	:form-fields="formFields"
->
-	<slot></slot>
-</authenticator>
+  <authenticator
+    :initial-state="initialAuthState"
+    :form-fields="formFields"
+  >
+    <slot />
+  </authenticator>
 </template>
 <style scoped></style>

@@ -22,6 +22,7 @@
     "aws-amplify": "^6.0.28",
     "neo4j-driver": "^5.18.0",
     "nuxt": "^3.10.3",
+    "nuxt-neo4j": "^0.0.4",
     "path": "^0.12.7",
     "remark-oembed": "^1.2.2",
     "vue": "^3.4.21",

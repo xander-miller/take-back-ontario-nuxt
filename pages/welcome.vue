@@ -3,8 +3,14 @@
   <NuxtLayout>
     <TboAuthenticator>
       <h1>Hello, {{ email }}!</h1>
-      <p>This is the onboarding page!</p>
+      
       <p>You signed up with referral code: {{ referralCode }}</p>
+      <div class="space-y-10">
+        <form @submit.prevent>
+          <ProfileEmailPermission />
+          <ProfileRidingSelector />
+        </form>
+      </div>
     </TboAuthenticator>
   </NuxtLayout>
 </template>
@@ -14,7 +20,7 @@ import { useAuthenticator} from  "@aws-amplify/ui-vue";
 const {route} = toRefs(useAuthenticator());
 var email = ref();
 var referralCode = ref(); 
-
+var emailPermission = ref();
 watch(route, async ()=>{ 
 	console.log('authstate', route.value);
 	if(route.value === 'authenticated'){

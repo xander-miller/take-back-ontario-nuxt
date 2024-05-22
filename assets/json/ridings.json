@@ -1,0 +1,622 @@
+[ 
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brantford-brant/",
+    "name": "Brantford—Brant",
+    "external_id": "13"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/niagara-centre/",
+    "name": "Niagara Centre",
+    "external_id": "68"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/niagara-falls/",
+    "name": "Niagara Falls",
+    "external_id": "69"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/flamborough-glanbrook/",
+    "name": "Flamborough—Glanbrook",
+    "external_id": "31"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/glengarry-prescott-russell/",
+    "name": "Glengarry—Prescott—Russell",
+    "external_id": "32"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/nepean/",
+    "name": "Nepean",
+    "external_id": "66"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/toronto-centre/",
+    "name": "Toronto Centre",
+    "external_id": "109"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/university-rosedale/",
+    "name": "University—Rosedale",
+    "external_id": "112"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/parkdale-high-park/",
+    "name": "Parkdale—High Park",
+    "external_id": "83"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/etobicoke-lakeshore/",
+    "name": "Etobicoke—Lakeshore",
+    "external_id": "29"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/toronto-danforth/",
+    "name": "Toronto—Danforth",
+    "external_id": "110"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/chatham-kent-leamington/",
+    "name": "Chatham-Kent—Leamington",
+    "external_id": "18"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/guelph/",
+    "name": "Guelph",
+    "external_id": "33"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/wellington-halton-hills/",
+    "name": "Wellington—Halton Hills",
+    "external_id": "115"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/burlington/",
+    "name": "Burlington",
+    "external_id": "15"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/oakville-north-burlington/",
+    "name": "Oakville North—Burlington",
+    "external_id": "75"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brampton-north/",
+    "name": "Brampton North",
+    "external_id": "10"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/milton/",
+    "name": "Milton",
+    "external_id": "59"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brampton-east/",
+    "name": "Brampton East",
+    "external_id": "9"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/richmond-hill/",
+    "name": "Richmond Hill",
+    "external_id": "89"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/king-vaughan/",
+    "name": "King—Vaughan",
+    "external_id": "45"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/toronto-st-pauls/",
+    "name": "Toronto—St. Paul's",
+    "external_id": "111"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kitchener-centre/",
+    "name": "Kitchener Centre",
+    "external_id": "47"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kitchener-south-hespeler/",
+    "name": "Kitchener South—Hespeler",
+    "external_id": "49"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/eglinton-lawrence/",
+    "name": "Eglinton—Lawrence",
+    "external_id": "25"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/don-valley-west/",
+    "name": "Don Valley West",
+    "external_id": "22"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/dufferin-caledon/",
+    "name": "Dufferin—Caledon",
+    "external_id": "23"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-centre/",
+    "name": "Scarborough Centre",
+    "external_id": "94"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-southwest/",
+    "name": "Scarborough Southwest",
+    "external_id": "98"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/london-west/",
+    "name": "London West",
+    "external_id": "55"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/lanark-frontenac-kingston/",
+    "name": "Lanark—Frontenac—Kingston",
+    "external_id": "51"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/hastings-lennox-and-addington/",
+    "name": "Hastings—Lennox and Addington",
+    "external_id": "40"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-guildwood/",
+    "name": "Scarborough—Guildwood",
+    "external_id": "95"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/don-valley-east/",
+    "name": "Don Valley East",
+    "external_id": "20"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/willowdale/",
+    "name": "Willowdale",
+    "external_id": "117"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-erin-mills/",
+    "name": "Mississauga—Erin Mills",
+    "external_id": "62"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/oakville/",
+    "name": "Oakville",
+    "external_id": "74"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/markham-thornhill/",
+    "name": "Markham—Thornhill",
+    "external_id": "57"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mushkegowuk-james-bay/",
+    "name": "Mushkegowuk—James Bay",
+    "external_id": "124"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/essex/",
+    "name": "Essex",
+    "external_id": "27"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/windsor-west/",
+    "name": "Windsor West",
+    "external_id": "119"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/windsor-tecumseh/",
+    "name": "Windsor—Tecumseh",
+    "external_id": "118"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/whitby/",
+    "name": "Whitby",
+    "external_id": "116"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/oshawa/",
+    "name": "Oshawa",
+    "external_id": "77"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kingston-and-the-islands/",
+    "name": "Kingston and the Islands",
+    "external_id": "46"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/thunder-bay-superior-north/",
+    "name": "Thunder Bay—Superior North",
+    "external_id": "106"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/timmins/",
+    "name": "Timmins",
+    "external_id": "108"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/leeds-grenville-thousand-islands-and-rideau-lakes/",
+    "name": "Leeds—Grenville—Thousand Islands and Rideau Lakes",
+    "external_id": "52"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/bay-of-quinte/",
+    "name": "Bay of Quinte",
+    "external_id": "6"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/peterborough-kawartha/",
+    "name": "Peterborough—Kawartha",
+    "external_id": "86"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/haliburton-kawartha-lakes-brock/",
+    "name": "Haliburton—Kawartha Lakes—Brock",
+    "external_id": "35"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/simcoe-grey/",
+    "name": "Simcoe—Grey",
+    "external_id": "99"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/barrie-springwater-oro-medonte/",
+    "name": "Barrie—Springwater—Oro-Medonte",
+    "external_id": "5"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/nipissing/",
+    "name": "Nipissing",
+    "external_id": "72"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/sudbury/",
+    "name": "Sudbury",
+    "external_id": "103"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kenora-rainy-river/",
+    "name": "Kenora—Rainy River",
+    "external_id": "44"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/durham/",
+    "name": "Durham",
+    "external_id": "24"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kiiwetinoong/",
+    "name": "Kiiwetinoong",
+    "external_id": "123"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/newmarket-aurora/",
+    "name": "Newmarket—Aurora",
+    "external_id": "67"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/northumberland-peterborough-south/",
+    "name": "Northumberland—Peterborough South",
+    "external_id": "73"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/york-centre/",
+    "name": "York Centre",
+    "external_id": "120"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kanata-carleton/",
+    "name": "Kanata—Carleton",
+    "external_id": "43"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-lakeshore/",
+    "name": "Mississauga—Lakeshore",
+    "external_id": "63"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/renfrew-nipissing-pembroke/",
+    "name": "Renfrew—Nipissing—Pembroke",
+    "external_id": "88"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/etobicoke-centre/",
+    "name": "Etobicoke Centre",
+    "external_id": "28"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/don-valley-north/",
+    "name": "Don Valley North",
+    "external_id": "21"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/waterloo/",
+    "name": "Waterloo",
+    "external_id": "114"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brampton-west/",
+    "name": "Brampton West",
+    "external_id": "12"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/stormont-dundas-south-glengarry/",
+    "name": "Stormont—Dundas—South Glengarry",
+    "external_id": "102"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/london-fanshawe/",
+    "name": "London—Fanshawe",
+    "external_id": "53"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/markham-unionville/",
+    "name": "Markham—Unionville",
+    "external_id": "58"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-agincourt/",
+    "name": "Scarborough—Agincourt",
+    "external_id": "93"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/london-north-centre/",
+    "name": "London North Centre",
+    "external_id": "54"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/thunder-bay-atikokan/",
+    "name": "Thunder Bay—Atikokan",
+    "external_id": "105"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/haldimand-norfolk/",
+    "name": "Haldimand—Norfolk",
+    "external_id": "34"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/ottawa-south/",
+    "name": "Ottawa South",
+    "external_id": "79"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-malton/",
+    "name": "Mississauga—Malton",
+    "external_id": "64"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/beaches-east-york/",
+    "name": "Beaches—East York",
+    "external_id": "7"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/sarnia-lambton/",
+    "name": "Sarnia—Lambton",
+    "external_id": "91"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/ajax/",
+    "name": "Ajax",
+    "external_id": "1"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-north/",
+    "name": "Scarborough North",
+    "external_id": "96"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/scarborough-rouge-park/",
+    "name": "Scarborough—Rouge Park",
+    "external_id": "97"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brampton-centre/",
+    "name": "Brampton Centre",
+    "external_id": "8"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/lambton-kent-middlesex/",
+    "name": "Lambton—Kent—Middlesex",
+    "external_id": "50"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/elgin-middlesex-london/",
+    "name": "Elgin—Middlesex—London",
+    "external_id": "26"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/huron-bruce/",
+    "name": "Huron—Bruce",
+    "external_id": "42"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/york-simcoe/",
+    "name": "York—Simcoe",
+    "external_id": "121"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/pickering-uxbridge/",
+    "name": "Pickering—Uxbridge",
+    "external_id": "87"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/oxford/",
+    "name": "Oxford",
+    "external_id": "82"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/davenport/",
+    "name": "Davenport",
+    "external_id": "19"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/simcoe-north/",
+    "name": "Simcoe North",
+    "external_id": "100"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/spadina-fort-york/",
+    "name": "Spadina—Fort York",
+    "external_id": "101"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/parry-sound-muskoka/",
+    "name": "Parry Sound—Muskoka",
+    "external_id": "84"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/kitchener-conestoga/",
+    "name": "Kitchener—Conestoga",
+    "external_id": "48"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/vaughan-woodbridge/",
+    "name": "Vaughan—Woodbridge",
+    "external_id": "113"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/thornhill/",
+    "name": "Thornhill",
+    "external_id": "104"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/perth-wellington/",
+    "name": "Perth—Wellington",
+    "external_id": "85"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/bruce-grey-owen-sound/",
+    "name": "Bruce—Grey—Owen Sound",
+    "external_id": "14"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/humber-river-black-creek/",
+    "name": "Humber River—Black Creek",
+    "external_id": "41"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/york-south-weston/",
+    "name": "York South—Weston",
+    "external_id": "122"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/etobicoke-north/",
+    "name": "Etobicoke North",
+    "external_id": "30"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/ottawa-centre/",
+    "name": "Ottawa Centre",
+    "external_id": "78"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/orleans/",
+    "name": "Orléans",
+    "external_id": "76"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/ottawa-west-nepean/",
+    "name": "Ottawa West—Nepean",
+    "external_id": "81"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/ottawa-vanier/",
+    "name": "Ottawa—Vanier",
+    "external_id": "80"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/timiskaming-cochrane/",
+    "name": "Timiskaming—Cochrane",
+    "external_id": "107"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/algoma-manitoulin/",
+    "name": "Algoma—Manitoulin",
+    "external_id": "2"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/sault-ste-marie/",
+    "name": "Sault Ste. Marie",
+    "external_id": "92"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/nickel-belt/",
+    "name": "Nickel Belt",
+    "external_id": "71"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/hamilton-east-stoney-creek/",
+    "name": "Hamilton East—Stoney Creek",
+    "external_id": "37"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/hamilton-centre/",
+    "name": "Hamilton Centre",
+    "external_id": "36"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/hamilton-mountain/",
+    "name": "Hamilton Mountain",
+    "external_id": "38"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/markham-stouffville/",
+    "name": "Markham—Stouffville",
+    "external_id": "56"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/brampton-south/",
+    "name": "Brampton South",
+    "external_id": "11"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-streetsville/",
+    "name": "Mississauga—Streetsville",
+    "external_id": "65"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/cambridge/",
+    "name": "Cambridge",
+    "external_id": "16"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-centre/",
+    "name": "Mississauga Centre",
+    "external_id": "60"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/aurora-oak-ridges-richmond-hill/",
+    "name": "Aurora—Oak Ridges—Richmond Hill",
+    "external_id": "3"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/hamilton-west-ancaster-dundas/",
+    "name": "Hamilton West—Ancaster—Dundas",
+    "external_id": "39"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/niagara-west/",
+    "name": "Niagara West",
+    "external_id": "70"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/carleton/",
+    "name": "Carleton",
+    "external_id": "17"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/st-catharines/",
+    "name": "St. Catharines",
+    "external_id": "90"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/mississauga-east-cooksville/",
+    "name": "Mississauga East—Cooksville",
+    "external_id": "61"
+  },
+  {
+    "url": "/boundaries/ontario-electoral-districts-representation-act-2015/barrie-innisfil/",
+    "name": "Barrie—Innisfil",
+    "external_id": "4"
+  }
+]

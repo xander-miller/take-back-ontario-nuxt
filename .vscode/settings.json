@@ -7,5 +7,20 @@
     "amplify/#current-cloud-backend": true,
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
+  },
+  "editor.formatOnSave": false,
+  "javascript.format.enable": false,
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": {
+    "extensions": [ ".html", ".js", ".vue", ".jsx" ]
+  },
+  "eslint.validate": [
+    { "language": "html", "autoFix": true },
+    { "language": "vue", "autoFix": true },
+    { "language": "javascript", "autoFix": true },
+    { "language": "javascriptreact", "autoFix": true }
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   }
 }

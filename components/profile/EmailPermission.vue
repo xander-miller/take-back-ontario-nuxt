@@ -4,24 +4,26 @@ var emailPermission = ref();
 </script>
 
 <template>
-  <p>
-    Would you like to be connected with other TBO members in your area?
-  </p>
-  <br>
-  <input 
-    id="emailPermissionYes"
-    v-model="emailPermission"
-    :value="true"
-    type="radio"
-  >
-  <label for="emailPermission"> <b>Yes</b>, put me in contact with other riding members</label>
-  <br>
-  <input 
-    id="emailPermissionNo"
-    v-model="emailPermission"
-    :value="false"
-    type="radio"
-  >
-  <label for="emailPermission"> <b>No</b>, do not put me in contact with other riding members</label>
+  <Card>
+    <p>
+      Do you give us permission to put you in contact with other TBO members in your area? This will be done via email blind carbon copy so that your email address is not exposed until you reply.
+    </p>
+    <br>
+    <input 
+      id="emailPermissionYes"
+      v-model="emailPermission"
+      :value="true"
+      type="radio"
+    >
+    <label for="emailPermission"> <b>Yes</b>, let other riding members reach out to me.</label>
+    <br>
+    <input 
+      id="emailPermissionNo"
+      v-model="emailPermission"
+      :value="false"
+      type="radio"
+    >
+    <label for="emailPermission"> <b>No</b>, do not let other riding members get in touch with me.</label>
+  </Card>
 </template>
 <style scoped></style>

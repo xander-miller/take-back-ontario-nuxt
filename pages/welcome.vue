@@ -2,13 +2,18 @@
 <template>
   <NuxtLayout>
     <TboAuthenticator>
-      <h1>Hello, {{ email }}!</h1>
-      
+      <h1>Welcome to Take Back Ontario!</h1>
       <p>You signed up with referral code: {{ referralCode }}</p>
-      <div class="space-y-10">
-        <form @submit.prevent>
+      <h2>Onboarding questions:</h2>
+      <div class="p-5">
+        <form
+          class="space-y-5"
+          @submit.prevent
+        >
           <ProfileEmailPermission />
+
           <ProfileRidingSelector />
+          <TboButton>Finish Sign Up</TboButton>
         </form>
       </div>
     </TboAuthenticator>
@@ -18,7 +23,6 @@
 import {  fetchUserAttributes } from '@aws-amplify/auth';
 import { useAuthenticator} from  "@aws-amplify/ui-vue";
 const {route} = toRefs(useAuthenticator());
-var email = ref();
 var referralCode = ref(); 
 var emailPermission = ref();
 watch(route, async ()=>{ 
@@ -26,7 +30,6 @@ watch(route, async ()=>{
 	if(route.value === 'authenticated'){
 	try {
     const userAttributes = await fetchUserAttributes();
-		email.value = userAttributes.email;
 		referralCode.value = userAttributes['custom:referral_code']
   } catch (error) {
     console.error(error);

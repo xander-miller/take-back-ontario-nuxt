@@ -54,5 +54,5 @@ amplifytools.xcconfig
 
 # docker db
 db/
-
+.env
 .tmp

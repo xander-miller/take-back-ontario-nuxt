@@ -22,6 +22,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "aws-amplify": "^6.3.2",
     "aws-sdk": "^2.1616.0",
+    "dotenv": "^16.4.5",
     "flowbite": "^2.3.0",
     "flowbite-vue": "^0.1.4",
     "neo4j-driver": "^5.18.0",

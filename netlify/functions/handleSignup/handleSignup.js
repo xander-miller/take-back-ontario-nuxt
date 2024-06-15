@@ -1,12 +1,14 @@
-const neo4j = require('neo4j-driver');
-require('dotenv').config();
+import neo4j from 'neo4j-driver';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const driver = neo4j.driver(
     process.env.NEO4J_URI,
     neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
 );
 
-exports.handler = async function (event, context) {
+const handler = async function (event, context) {
     const session = driver.session();
 
     try {
@@ -76,3 +78,5 @@ exports.handler = async function (event, context) {
         await session.close();
     }
 };
+
+export { handler };

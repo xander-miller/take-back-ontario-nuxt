@@ -44,8 +44,13 @@ theme: {
   corePlugins: {
     preflight: true,
   },
-  plugins: [tailwindTypography],
+  plugins: [
+    tailwindTypography,
+    require('flowbite/plugin'),
+  ],
   content: [
+    'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',
+    'node_modules/flowbite/**/*.{js,jsx,ts,tsx}',
     'components/**/*.{vue,js,ts}',
     'layouts/**/*.vue',
     'pages/**/*.vue',

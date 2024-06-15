@@ -1,6 +1,6 @@
 {
   "auth": {
-    "takebackontarionuxte51adf3ee51adf3e": {
+    "tboAuth2": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -25,6 +25,25 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "geo": {
+    "dev3PlaceIndex": {
+      "accessType": "AuthorizedUsers",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "tboAuth2"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
     }
   }
 }

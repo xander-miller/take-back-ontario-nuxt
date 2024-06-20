@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "takebackontarionuxte51adf3ee51adf3e": {}
+        "takebackontarionuxte51adf3ee51adf3e": {},
+        "tboAuth2": {}
       },
       "geo": {
         "tboPlaceIndexDev": {}

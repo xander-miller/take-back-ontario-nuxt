@@ -1,8 +1,9 @@
 {
   "aws_project_region": "us-east-1",
+  "aws_cognito_identity_pool_id": "us-east-1:48799dbd-60f5-4ab3-94c1-95dae148d931",
   "aws_cognito_region": "us-east-1",
-  "aws_user_pools_id": "us-east-1_EcoJC2kFJ",
-  "aws_user_pools_web_client_id": "24q1ef1jquln0bn86re5m050cc",
+  "aws_user_pools_id": "us-east-1_mRzrzB7pS",
+  "aws_user_pools_web_client_id": "29a4qo8iggqjvvtn56j9idkarn",
   "oauth": {},
   "aws_cognito_username_attributes": [
     "EMAIL"
@@ -27,9 +28,9 @@
       "region": "us-east-1",
       "search_indices": {
         "items": [
-          "dev3PlaceIndex-devthree"
+          "tboPlaceIndexDev-dev"
         ],
-        "default": "dev3PlaceIndex-devthree"
+        "default": "tboPlaceIndexDev-dev"
       }
     }
   }

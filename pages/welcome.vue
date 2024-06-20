@@ -7,10 +7,9 @@
       <div class="p-5">
         <form
           class="space-y-5"
-          @submit.prevent
+          @submit.prevent="finishSignUp"
         >
           <ProfileEmailPermission />
-
           <ProfileRidingSelector />
           <TboButton>Finish Sign Up</TboButton>
         </form>
@@ -22,62 +21,60 @@
 <script setup>
 import { fetchUserAttributes } from '@aws-amplify/auth';
 import { useAuthenticator } from "@aws-amplify/ui-vue";
+import { useUserStore } from '~/store/user';
+import { ref, watch, toRefs } from 'vue';
+
 const { route } = toRefs(useAuthenticator());
-var referralCode = ref(); 
-var emailPermission = ref();
+const userStore = useUserStore();
+const referralCode = ref('');
+const emailPermission = ref('');
 
-watch(route, async () => {
-  console.log('authstate', route.value);
-  if (route.value === 'authenticated') {
-    try {
-      const userAttributes = await fetchUserAttributes();
-      referralCode.value = userAttributes['custom:referral_code'];
+// watch(route, async () => {
+//   console.log('Route changed:', route.value);
+//   if (route.value === 'authenticated') {
+//     try {
+//       const userAttributes = await fetchUserAttributes();
+//       referralCode.value = userAttributes['custom:referral_code'];
 
-      // Prepare user data to send to Netlify function
-      const userData = {
-        Username: userAttributes['email'],
-        UserAttributes: [
-          {
-            Name: 'email',
-            Value: userAttributes['email']
-          },
-          {
-            Name: 'custom:referral_code',
-            Value: userAttributes['custom:referral_code']
-          }
-        ],
-        ClientId: userAttributes['sub'] // Using sub as the client ID
-      };
+//       // Check if the user exists in Neo4j
+//       const userExists = await checkUserExistsInNeo4j(userAttributes['sub']);
+//       if (userExists) {
+//         // Fetch user data from Neo4j and populate the store
+//         const userData = await fetchUserDataFromNeo4j(userAttributes['sub']);
+//         populateUserStore(userData);
+//       } else {
+//         // Set user information in Pinia store for new users
+//         userStore.setId(userAttributes['sub']);
+//         userStore.setName(userAttributes['name']);
+//         userStore.setEmail(userAttributes['email']);
+//         userStore.setJoined(new Date().toISOString());
+//         userStore.setPhone(userAttributes['phone_number']);
+//         userStore.setRole(userAttributes['custom:role']);
+//         userStore.setRiding(userAttributes['custom:riding']);
+//         userStore.setLastAccess(new Date().toISOString());
+//         userStore.setCanContact(userAttributes['custom:can_contact'] === 'true');
 
-      // Send user data to Netlify function
-      await sendUserDataToNetlify(userData);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-});
+//         // Send user data to Netlify function
+//         await sendUserDataToNetlify({
+//           Username: userAttributes['email'],
+//           UserAttributes: [
+//             { Name: 'email', Value: userAttributes['email'] },
+//             { Name: 'custom:referral_code', Value: userAttributes['custom:referral_code'] }
+//           ],
+//           ClientId: userAttributes['sub']
+//         });
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+// });
 
-// Function to send user data to Netlify function
-const sendUserDataToNetlify = async (userData) => {
-  try {
-    const response = await fetch('/.netlify/functions/handleSignup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to send user data to Netlify function');
-    }
-
-    const result = await response.json();
-    console.log('User data sent successfully:', result);
-  } catch (error) {
-    console.error('Error sending user data to Netlify function:', error);
-  }
+const finishSignUp = () => {
+  // Additional sign-up logic can be placed here
+  // e.g., updating other user store fields based on form input
 };
+
 </script>
 
 <style scoped></style>

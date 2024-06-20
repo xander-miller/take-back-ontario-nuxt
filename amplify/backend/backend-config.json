@@ -1,6 +1,6 @@
 {
   "auth": {
-    "tboAuth2": {
+    "takebackontarionuxte51adf3ee51adf3e": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -28,7 +28,7 @@
     }
   },
   "geo": {
-    "dev3PlaceIndex": {
+    "tboPlaceIndexDev": {
       "accessType": "AuthorizedUsers",
       "dataProvider": "HERE",
       "dataSourceIntendedUse": "SingleUse",
@@ -38,7 +38,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "tboAuth2"
+          "resourceName": "takebackontarionuxte51adf3ee51adf3e"
         }
       ],
       "isDefault": true,

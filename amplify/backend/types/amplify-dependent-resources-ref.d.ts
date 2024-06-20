@@ -1,15 +1,17 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "tboAuth2": {
+    "takebackontarionuxte51adf3ee51adf3e": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
+      "IdentityPoolId": "string",
+      "IdentityPoolName": "string",
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
   },
   "geo": {
-    "dev3PlaceIndex": {
+    "tboPlaceIndexDev": {
       "Arn": "string",
       "Name": "string",
       "Region": "string"

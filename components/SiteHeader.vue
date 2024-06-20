@@ -139,8 +139,8 @@
 
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { Authenticator, useAuthenticator } from '@aws-amplify/ui-vue';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { useAuthenticator } from '@aws-amplify/ui-vue';
 import SiteHeaderLink from './SiteHeaderLink.vue';
 const {user, signOut} = toRefs(useAuthenticator());
 const navigation = [

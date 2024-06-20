@@ -64,7 +64,7 @@
     }
   },
   "Parameters": {
-    "authtboAuth2UserPoolId": {
+    "authtakebackontarionuxte51adf3ee51adf3eUserPoolId": {
       "Type": "String"
     },
     "authRoleName": {

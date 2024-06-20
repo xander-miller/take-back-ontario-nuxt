@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/tailwindcss",
     "nuxt-neo4j",
+    '@pinia/nuxt'
   ],
   neo4j: {
     uri: neo4jUri, 
@@ -17,7 +18,6 @@ export default defineNuxtConfig({
       password: neo4jPassword,
     },
   },
- 
   vite: {
     optimizeDeps: {
       exclude: ['fsevents']
@@ -73,4 +73,7 @@ export default defineNuxtConfig({
   alias: {
     './runtimeConfig': './runtimeConfig.browse'
   },
+  plugins: [
+    { src: '~/plugins/amplify.js', mode: 'client' }
+  ]
 });

@@ -21,6 +21,9 @@ npm install netlify-cli -g
 
 [Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
+### Netlify
+Use `netlify link` to be able to access environment variables. You need access to the netlify project in order to do so.
+
 ### Docker
 - Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running.
 

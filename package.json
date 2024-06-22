@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "lint": "eslint --ext .js,.vue .",
     "lint-build": "npm run lint -- --max-warnings 0",
-    "dev": "netlify dev",
+    "dev": "netlify dev --context production",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

@@ -1,8 +1,5 @@
 import neo4j from 'neo4j-driver';
-import dotenv from 'dotenv';
-import { CognitoJwtVerifier } from "aws-jwt-verify";
-
-dotenv.config();
+import { validateJwt } from '../validateJwt.js';
 
 const driver = neo4j.driver(
   process.env.NEO4J_URI,
@@ -12,24 +9,18 @@ const driver = neo4j.driver(
 export const handler = async (event) => {
   const { jwt } = JSON.parse(event.body);
   const session = driver.session();
-  const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
-  console.log('aud', decodedJwt.aud);
+  const decodedJwt = await validateJwt(jwt);
+  const cognitoId = decodedJwt.sub;
 
-  const verifier = CognitoJwtVerifier.create({
-    userPoolId: "us-east-1:48799dbd-60f5-4ab3-94c1-95dae148d931",
-    tokenUse: "access",
-    clientId: decodedJwt.aud,
-  });
-
-  try {
-    const payload = await verifier.verify(jwt);
-    console.log("Token is valid. Payload:", payload);
-  } catch {
-    console.log("Token not valid!");
+  if (!cognitoId) {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ error: 'Unauthorized' }),
+    };
   }
 
   try {
-    console.log(`Checking if user exists with ID: ${jwt}`);
+    console.log(`Checking if user exists with ID: ${cognitoId}`);
     const result = await session.run(
       'MATCH (u:User {id: $cognitoId}) RETURN u',
       { cognitoId }
@@ -38,7 +29,12 @@ export const handler = async (event) => {
     await session.close();
 
     const exists = result.records.length > 0;
-    console.log(`User exists: ${exists}`);
+    if (exists) {
+      const userNode = result.records[0].get('u');
+      console.log('User properties:', userNode.properties);
+    } else {
+      console.log('User does not exist.');
+    }
 
     return {
       statusCode: 200,

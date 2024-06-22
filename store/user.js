@@ -1,7 +1,8 @@
 // store/user.ts
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
-import { useAuthStore } from './auth';
+import { fetchUserAttributes } from '@aws-amplify/auth';
+
 
 export const useUserStore = defineStore('user', () => {
   const user = ref({

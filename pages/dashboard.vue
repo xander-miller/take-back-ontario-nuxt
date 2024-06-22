@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div v-if="authStore.isAuthenticated">
+    <div v-if="authStore.authStatus === 'authenticated'">
       Hello World
     </div>
     <div v-else>

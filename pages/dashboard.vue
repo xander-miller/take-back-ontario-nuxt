@@ -4,7 +4,7 @@
       <div
         id="cy"
         ref="cy"
-        style="width: 400px; height: 400px;"
+        style="width: 100%; height: 5s00px; position: relative; display: block; box-sizing: border-box;"
       />
     </div>
     <div v-else>

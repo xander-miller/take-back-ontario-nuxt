@@ -1,16 +1,32 @@
-import neo4j from 'neo4j-driver';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const driver = neo4j.driver(
-  process.env.NEO4J_URI,
-  neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
-);
+import { validateJwt } from '../validateJwt.js';
+import { getNeo4jSession } from '../getNeo4jSession.js';
 
 export const handler = async (event) => {
-  const { cognitoId } = JSON.parse(event.body);
-  const session = driver.session();
+  let decodedJwt = null;
+
+  // Validate and decode the JWT - pass function event.
+  try {
+    decodedJwt = await validateJwt(event);
+    if (!decodedJwt || !decodedJwt.sub) {
+      throw new Error('No user ID found in JWT');
+    }
+  } catch (error) {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ message: 'Unauthorized', error }),
+    };
+  }
+
+  const cognitoId = decodedJwt.sub;
+
+  // If neo4j connection fails, return a 500 internal server error.
+  const session = await getNeo4jSession();
+  if (!session) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to connect to Neo4j' }),
+    };
+  }
 
   try {
     console.log(`Fetching user data for ID: ${cognitoId}`);
@@ -19,16 +35,16 @@ export const handler = async (event) => {
       { cognitoId }
     );
 
-    await session.close();
 
     if (result.records.length === 0) {
       return {
-        statusCode: 200,
+        statusCode: 404,
         body: JSON.stringify({ error: 'User not found' }),
       };
     }
 
     const user = result.records[0].get('u').properties;
+
     console.log('Fetched user data from neo4j:', user);
     return {
       statusCode: 200,
@@ -36,10 +52,11 @@ export const handler = async (event) => {
     };
   } catch (error) {
     console.error('Error fetching user data:', error);
-    await session.close();
     return {
-      statusCode: 200,
+      statusCode: 500,
       body: JSON.stringify({ error: error.message }),
     };
+  } finally {
+    await session.close();
   }
 };

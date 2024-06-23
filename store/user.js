@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { fetchUserAttributes } from '@aws-amplify/auth';
 
-
 export const useUserStore = defineStore('user', () => {
   const user = ref({
     id: '',
@@ -18,8 +17,11 @@ export const useUserStore = defineStore('user', () => {
     canContact: false,
     referredByCode: '',
     emailVerified: false,
-    jwt: ''
+    jwt: '',
+    hydrated: false
   });
+
+  const amplifyUser = ref(null);
 
   const setUserProperty = (property, value) => {
     if (user.value.hasOwnProperty(property)) {
@@ -40,44 +42,45 @@ export const useUserStore = defineStore('user', () => {
   const setReferredByCode = (code) => setUserProperty('referredByCode', code);
   const setEmailVerified = (verified) => setUserProperty('emailVerified', verified);
   const setJwt = (jwt) => setUserProperty('jwt', jwt);
+  const setHydrated = (hydrated) => setUserProperty('hydrated', hydrated);
 
   const checkUserExistsInNeo4j = async (jwt) => {
-    try {
-      const response = await fetch('/.netlify/functions/checkUserExists', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jwt })
-      });
-  
-      if (!response.ok) throw new Error('Failed to check user existence in Neo4j');
-      const result = await response.json();
-      return result.exists;
-    } catch (error) {
-      console.error('Error checking user existence in Neo4j:', error);
-      return false;
+    const response = await fetch('/.netlify/functions/checkUserExists', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jwt })
+    });
+    if (!response.ok) {
+      if (response.status === 404) {
+        return false;
+      }
+      throw new Error('Failed to check user existence in Neo4j', response.status);
     }
+    return true;
   };
 
-  const fetchUserDataFromNeo4j = async (id) => {
-    try {
-      const response = await fetch('/.netlify/functions/fetchUserData', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-  
-      if (!response.ok) throw new Error('Failed to fetch user data from Neo4j');
-      const userData = await response.json();
-      return userData;
-    } catch (error) {
-      console.error('Error fetching user data from Neo4j:', error);
+  const fetchUserDataFromNeo4j = async (jwt) => {
+    const response = await fetch('/.netlify/functions/fetchUserData', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jwt })
+    });
+
+    if (response.status === 404) {
+      console.log('User not found in Neo4j');
       return null;
     }
+
+    if (!response.ok) {
+      console.error('Failed to fetch user data from Neo4j', response.status);
+    }
+    const userData = await response.json();
+    return userData;
   };
   
-  const sendUserDataToNetlify = async (userData) => {
+  const sendUserDataToNeo4j = async (userData) => {
     try {
-      const response = await fetch('/.netlify/functions/handleSignup', {
+      const response = await fetch('/.netlify/functions/storeUserData', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
@@ -91,16 +94,87 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
+  const hydrateUser = async (jwt) => {
+    // Check if user exists. If so, fetch user data from Neo4j. If not, send user data to Neo4j.
+    let userAttributes = null;
+    try {
+      // This can throw an error if the user is not authenticated.
+      userAttributes = await fetchUserAttributes();
+      console.log('got user attributes', userAttributes);
+      console.log('custom', userAttributes['custom:referral_code']);
+    } catch (e) {
+      console.error('Error fetching user attributes:', e);
+      return;
+    }
+    console.log('got user attributes', userAttributes);
+    // If the object looks, right, set it to the amplifyUser ref.
+    if (userAttributes.sub) {
+      amplifyUser.value = userAttributes;
+    }
+    // Check if the user exists.
+    const exists = await checkUserExistsInNeo4j(jwt);
+    if (exists) {
+      const userData = await fetchUserDataFromNeo4j(jwt);
+      if (userData) {
+        // Set hydrated immediately, or the watch gets stuck in a loop.
+        setHydrated(true);
+        setId(userData.id);
+        setName(userData.name);
+        setEmail(userData.email);
+        setJoined(userData.joined);
+        setReferralCodes(userData.referralCodes);
+        setPhone(userData.phone);
+        setRole(userData.role);
+        setRiding(userData.riding);
+        setLastAccess(userData.lastAccess);
+        setCanContact(userData.canContact);
+        setReferredByCode(amplifyUser.value['custom:referral_code']);
+        setEmailVerified(userData.emailVerified);
+      }
+    } else {
+      const userData = {
+        jwt,
+        email: amplifyUser.value.email,
+        referredByCode: amplifyUser.value['custom:referral_code']
+      };
+      sendUserDataToNeo4j(userData);
+    }
+  }
+
   // User id is set in /store/auth.js - so authentication takes place first, and then this kicks in.
   watch(user, async (newUser) => {
-    if (newUser.id && newUser.jwt) {
-      const userExists = await checkUserExistsInNeo4j(newUser.jwt);
-      console.log('got new cognito id', newUser.id, userExists);
+    console.log('New user:', newUser);
+    if (newUser.jwt && !newUser.hydrated) {
+      console.log('yolo, user:', await fetchUserAttributes());
+
+      await hydrateUser(newUser.jwt);
     }
   }, { immediate: true, deep: true });
 
+  const reset = () => {
+    user.value = {
+      id: '',
+      name: '',
+      email: '',
+      joined: '',
+      referralCodes: [],
+      phone: '',
+      role: '',
+      riding: '',
+      lastAccess: '',
+      canContact: false,
+      referredByCode: '',
+      emailVerified: false,
+      jwt: '',
+      hydrated: false
+    };
+    amplifyUser.value = null;
+  };
+
   return {
     user,
+    amplifyUser,
+    reset,
     setId,
     setName,
     setEmail,

@@ -47,7 +47,7 @@
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div
-            v-if="!user"
+            v-if="!authStore.authStatus === 'authenticated'"
             class="hidden sm:ml-6 sm:block"
           >
             <div class="flex space-x-4">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div
-            v-if="!user"
+            v-if="!authStore.authStatus === 'authenticated'"
             class="hidden sm:ml-6 sm:block"
           >
             <div class="flex space-x-4">
@@ -74,7 +74,7 @@
 
           <!-- Profile dropdown -->
           <Menu
-            v-if="user"
+            v-if="authStore.authStatus === 'authenticated'"
             as="div"
             class="relative ml-3"
           >
@@ -110,7 +110,7 @@
                   <a
                     href="#"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    @click.prevent="signOut"
+                    @click.prevent="authStore.signOutUser"
                   >Sign out</a>
                 </MenuItem>
               </MenuItems>
@@ -140,9 +140,10 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { useAuthenticator } from '@aws-amplify/ui-vue';
+import { useAuthStore } from '~/store/auth';
 import SiteHeaderLink from './SiteHeaderLink.vue';
-const {user, signOut} = toRefs(useAuthenticator());
+
+const authStore = useAuthStore();
 const navigation = [
   { name: 'Learn More', href: '/about', current: true },
   { name: 'Events', href: '/events', current: false },

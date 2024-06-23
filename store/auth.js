@@ -5,7 +5,7 @@ import { useUserStore } from './user';
 
 
 export const useAuthStore = defineStore('auth', () => {
-  const { authStatus, user, signOut } = toRefs(useAuthenticator());
+  const { authStatus, signOut } = toRefs(useAuthenticator());
   const amplifySignout = signOut.value;
   const jwt = ref(null);
   const userAttributes = ref(null);
@@ -16,6 +16,13 @@ export const useAuthStore = defineStore('auth', () => {
     jwt.value = token;
   };
 
+  const signOutUser = async () => {
+    amplifySignout();
+    userStore.reset();
+    await navigateTo('/welcome');
+
+  };
+
   watch(jwt, async (newJwt) => {
     if (newJwt) {
       userStore.setJwt(newJwt);
@@ -23,5 +30,5 @@ export const useAuthStore = defineStore('auth', () => {
     }
   });
 
-  return { authStatus, setJwt, jwt, amplifySignout };
+  return { authStatus, setJwt, jwt, signOutUser };
 });

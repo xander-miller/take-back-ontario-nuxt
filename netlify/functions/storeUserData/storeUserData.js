@@ -1,40 +1,35 @@
-import neo4j from 'neo4j-driver';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const driver = neo4j.driver(
-  process.env.NEO4J_URI,
-  neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
-);
+import { validateJwt } from '../validateJwt.js';
+import { getNeo4jSession } from '../getNeo4jSession.js';
 
 const handler = async function (event, context) {
-  const session = driver.session();
+  let decodedJwt = null;
+
+  // Validate and decode the JWT - pass function event.
+  try {
+    decodedJwt = await validateJwt(event);
+    if (!decodedJwt || !decodedJwt.sub) {
+      throw new Error('No user ID found in JWT');
+    }
+  } catch (error) {
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ message: 'Unauthorized', error }),
+    };
+  }
+
+  // If neo4j connection fails, return a 500 internal server error.
+  const session = await getNeo4jSession();
+  if (!session) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to connect to Neo4j' }),
+    };
+  }
 
   try {
-    const data = JSON.parse(event.body);
-
-    const username = data.Username;
-    const clientId = data.ClientId;
-    const userAttributes = data.UserAttributes;
-
-    const email = userAttributes.find(attr => attr.Name === 'email').Value;
-    const referralCode = userAttributes.find(attr => attr.Name === 'custom:referral_code').Value;
-
-    // Check if user already exists
-    console.log(`Checking if user exists with email: ${email}`);
-    const userCheckResult = await session.run(
-      'MATCH (u:User {email: $email}) RETURN u',
-      { email }
-    );
-
-    if (userCheckResult.records.length > 0) {
-      console.log(`User with email ${email} already exists`);
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ error: 'User already exists' }),
-      };
-    }
+    const email = decodedJwt.email;
+    const referralCode = decodedJwt['custom:referral_code'];
+    const cognitoId = decodedJwt.sub;
 
     // Check if referral code exists
     console.log(`Checking if referral code exists: ${referralCode}`);
@@ -46,20 +41,23 @@ const handler = async function (event, context) {
     if (referralResult.records.length === 0) {
       console.log(`Referral code ${referralCode} not found`);
       return {
-        statusCode: 200,
+        statusCode: 404,
         body: JSON.stringify({ error: 'Referral code not found' }),
       };
     }
 
     const referrer = referralResult.records[0].get('referrer');
+    console.log('Referrer found:', referrer.properties);
+
+    // Extract necessary properties from the referrer
+    const referrerId = referrer.properties.id;
 
     // Create new user and connect with referrer
     const createUserQuery = `
-      MATCH (referrer:User) WHERE $referralCode IN referrer.referralCodes
+      MATCH (referrer:User {id: $referrerId})
       CREATE (newUser:User {
-        name: $username,
         email: $email,
-        id: $clientId,
+        id: $cognitoId,
         referralCodes: [],
         joined: datetime()
       })
@@ -69,12 +67,12 @@ const handler = async function (event, context) {
       RETURN newUser
     `;
 
-    console.log(`Creating new user with ID: ${clientId}`);
+    console.log(`Creating new user with ID: ${cognitoId}`);
     const createUserResult = await session.run(createUserQuery, {
-      username,
       email,
-      clientId,
+      cognitoId,
       referralCode,
+      referrerId
     });
 
     const newUser = createUserResult.records[0].get('newUser');
@@ -89,7 +87,7 @@ const handler = async function (event, context) {
   } catch (error) {
     console.error('Error creating user:', error);
     return {
-      statusCode: 200,
+      statusCode: 500, // Changed to 500 to indicate an internal server error
       body: JSON.stringify({ error: 'An error occurred while creating the user' }),
     };
   } finally {

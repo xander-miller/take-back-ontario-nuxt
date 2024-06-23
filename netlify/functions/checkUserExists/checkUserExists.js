@@ -1,24 +1,34 @@
-import neo4j from 'neo4j-driver';
 import { validateJwt } from '../validateJwt.js';
-
-const driver = neo4j.driver(
-  process.env.NEO4J_URI,
-  neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
-);
+import { getNeo4jSession } from '../getNeo4jSession.js';
 
 export const handler = async (event) => {
-  const { jwt } = JSON.parse(event.body);
-  const session = driver.session();
-  const decodedJwt = await validateJwt(jwt);
-  const cognitoId = decodedJwt.sub;
+  let decodedJwt = null;
 
-  if (!cognitoId) {
+  // Validate and decode the JWT - pass function event.
+  try {
+    decodedJwt = await validateJwt(event);
+    if (!decodedJwt || !decodedJwt.sub) {
+      throw new Error('No user ID found in JWT');
+    }
+  } catch (error) {
     return {
       statusCode: 401,
-      body: JSON.stringify({ error: 'Unauthorized' }),
+      body: JSON.stringify({ message: 'Unauthorized', error }),
     };
   }
 
+  const cognitoId = decodedJwt.sub;
+
+  // If neo4j connection fails, return a 500 internal server error.
+  const session = await getNeo4jSession();
+  if (!session) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to connect to Neo4j' }),
+    };
+  }
+
+  // Return 200 if user exists, 404 if not, and 500 if something goes wrong.
   try {
     console.log(`Checking if user exists with ID: ${cognitoId}`);
     const result = await session.run(
@@ -26,26 +36,25 @@ export const handler = async (event) => {
       { cognitoId }
     );
 
-    await session.close();
-
     const exists = result.records.length > 0;
     if (exists) {
-      const userNode = result.records[0].get('u');
-      console.log('User properties:', userNode.properties);
+      console.log('User exists');
+      return {
+        statusCode: 200,
+      };
     } else {
-      console.log('User does not exist.');
+      console.log('User does not exist');
+      return {
+        statusCode: 404,
+      };
     }
-
+  } catch (e) {
+    console.error('Error checking user existence:', e);
     return {
-      statusCode: 200,
-      body: JSON.stringify({ exists }),
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Error checking user existence' }),
     };
-  } catch (error) {
-    console.error('Error checking user existence:', error);
+  } finally {
     await session.close();
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ error: error.message }),
-    };
   }
 };

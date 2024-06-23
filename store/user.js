@@ -77,6 +77,25 @@ export const useUserStore = defineStore('user', () => {
     const userData = await response.json();
     return userData;
   };
+
+  const fetchNetworkFromNeo4j = async (jwt) => {
+    const response = await fetch('/.netlify/functions/fetchNetworkGraph', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jwt })
+    });
+
+    if (response.status === 404) {
+      console.log('Network not found in Neo4j');
+      return null;
+    }
+
+    if (!response.ok) {
+      console.error('Failed to fetch network from Neo4j', response.status);
+    }
+    const networkData = await response.json();
+    return networkData;
+  };
   
   const sendUserDataToNeo4j = async (userData) => {
     try {
@@ -187,6 +206,7 @@ export const useUserStore = defineStore('user', () => {
     setCanContact,
     setReferredByCode,
     setEmailVerified,
-    setJwt
+    setJwt,
+    fetchNetworkFromNeo4j
   };
 });

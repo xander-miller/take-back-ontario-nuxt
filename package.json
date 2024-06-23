@@ -24,6 +24,7 @@
     "aws-amplify": "^6.3.2",
     "aws-jwt-verify": "^4.0.1",
     "aws-sdk": "^2.1616.0",
+    "cytoscape": "^3.29.2",
     "flowbite": "^2.3.0",
     "flowbite-vue": "^0.1.4",
     "neo4j-driver": "^5.18.0",

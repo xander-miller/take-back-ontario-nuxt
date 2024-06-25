@@ -89,22 +89,6 @@ import CnTowerChevron from '~/components/CnTowerChevron.vue';
 
 }
 
-.page-body-wrapper {
-  z-index: 0;
-  position: relative;
-  width: 100%;
-  height: auto;
-  background-color: white;
-}
-
-.page-body {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 15% 10%;
-}
-
 svg {
   position: absolute;
   width: 100%;
@@ -137,17 +121,6 @@ svg {
   left: 7%;
   width: 39%;
   height: auto;
-}
-
-.page-container {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: left;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1;
 }
 
 .hero-container {

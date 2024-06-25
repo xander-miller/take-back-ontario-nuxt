@@ -71,3 +71,30 @@ li:last-child {
   margin-top: 60px;
   text-align: center;
 }
+
+.page-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: left;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.page-body-wrapper {
+  z-index: 0;
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: white;
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 15% 10%;
+}

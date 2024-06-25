@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "nuxt-neo4j",
   ],
+  buildModules:[
+    "@nuxtjs/dotenv"
+  ],
   neo4j: {
     uri: neo4jUri, 
     auth: {
@@ -73,4 +76,11 @@ export default defineNuxtConfig({
   alias: {
     './runtimeConfig': './runtimeConfig.browse'
   },
+   
+  runtimeConfig: {
+    public:{
+      LOCATION_API_KEY: process.env.LOCATION_API_KEY,
+      LOCATION_API_URI: process.env.LOCATION_API_URI,
+    }
+  }
 });

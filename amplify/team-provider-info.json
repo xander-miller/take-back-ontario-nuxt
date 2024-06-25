@@ -35,10 +35,30 @@
     "categories": {
       "auth": {
         "takebackontarionuxte51adf3ee51adf3e": {},
-        "tboAuth2": {}
+        "tboAuth2": {},
+        "userPoolGroups": {}
       },
       "geo": {
         "dev3PlaceIndex": {}
+      }
+    }
+  },
+  "devfour": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-takebackontarionuxt-devfour-9673e-authRole",
+      "UnauthRoleArn": "arn:aws:iam::975050295513:role/amplify-takebackontarionuxt-devfour-9673e-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::975050295513:role/amplify-takebackontarionuxt-devfour-9673e-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-takebackontarionuxt-devfour-9673e-deployment",
+      "UnauthRoleName": "amplify-takebackontarionuxt-devfour-9673e-unauthRole",
+      "StackName": "amplify-takebackontarionuxt-devfour-9673e",
+      "StackId": "arn:aws:cloudformation:us-east-1:975050295513:stack/amplify-takebackontarionuxt-devfour-9673e/fad48280-226f-11ef-b6e6-0afffce69ef7",
+      "AmplifyAppId": "d21pakktsa7tjn"
+    },
+    "categories": {
+      "auth": {
+        "tboAuth2": {},
+        "userPoolGroups": {}
       }
     }
   }

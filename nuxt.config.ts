@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     "nuxt-neo4j",
     '@pinia/nuxt'
   ],
+  buildModules:[
+    "@nuxtjs/dotenv"
+  ],
   neo4j: {
     uri: neo4jUri, 
     auth: {

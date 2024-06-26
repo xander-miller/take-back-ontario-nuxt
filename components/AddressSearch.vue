@@ -1,69 +1,118 @@
 <script setup>
-	import debounce from 'lodash.debounce';
-	import axios from 'axios'; 
-  const runtimeConfig = useRuntimeConfig();
-  console.log('runtimeConfig: ', runtimeConfig);
-	const addressResults = ref([]);
-	const search = ref('');	
-  const selectedAddress = ref();
-	const ridingResult = ref();
-	// const locationUri = runtimeConfig.public.LOCATION_API_URI;
-	// const locationApiKey = runtimeConfig.public.LOCATION_API_KEY;
-	const locationUri = 'https://places.geo.us-east-1.amazonaws.com/places/v0/indexes/TboPlaceIndexDev';
-	const locationApiKey = 'v1.public.eyJqdGkiOiJmMzNlZWZiZC00ZDU5LTQwYzAtYjBjMC00YWRkM2U1Y2NhYzYifSULF22xK27rtGIVfmNmtXdcLYZaszl80iGeWjh-GxBLNXbIMFgx3qjCiwrwAGGFcUlTy7KtC7teqv6KsBcDVdSjwhtOPim3YqjdZW-HQqTL-DzLCeVtIChLphtb5k1xk88h5Ag50YAxx_-BZSC4CZZu_iif_kIf0R8eC9slRTlAOw63Xd1Z7FBPg-Ac0IiFmKBF4k6Tj4AmT1lsF2_rk-fykKbdnwh-cREWO0djmeNeTXHSeqv87qv3cSD4eK5bqLnngm5vXH6P1b-UZgEDOXOO0DAwMfFSiNYOO7ciOGRbMMiI-GYMpfYILDl10bXuMYO-mmpyUyBvt1MMDRhfVWY.ZWU0ZWIzMTktMWRhNi00Mzg0LTllMzYtNzlmMDU3MjRmYTkx';
+import debounce from 'lodash.debounce';
+import { ref, watch } from 'vue';
 
-	watch(search, debounce(()  =>  {
-		updateAddressResults();
-	}, 500));
-	watch(selectedAddress, searchForAddressRiding);
+const addressResults = ref([]);
+const search = ref('');
+const selectedAddress = ref();
+const ridingResult = ref();
 
-	async function updateAddressResults(){
-		console.log('search watch: ', search);
-		selectedAddress.value  = null;
-		if(search.value === ''){
-			addressResults.value.length = 0;
-		} else {
-			const newAddressResults = await addressAutoComplete(search.value);
-			addressResults.value.length = 0;
-			addressResults.value.push(...newAddressResults);
-		}
-		console.log('addr res', addressResults.value, addressResults.length)
-	}
+// Watch search input and debounce the updateAddressResults function
+watch(search, debounce(() => {
+  updateAddressResults();
+}, 500));
 
-	async function searchForAddressRiding(){
-		getPlace(selectedAddress.placeId);
-	}
+// Watch selectedAddress and fetch place details when changed
+watch(selectedAddress, searchForAddressRiding);
 
-	async function getPlace(placeId){
-
-    var placeResult = await axios.get(`${locationUri}/places/${placeId}?key=${locationApiKey}`,
-    );
-		console.log('placeResult',placeResult);
-
-	}
-
-	async function addressAutoComplete(text) {
-		console.log('addressAutoComplete: ', text);
-    // TODO create env var for this
-    var suggestions = await axios.post(`${locationUri}/search/suggestions?key=${locationApiKey}`,
-    {
-			"Text": text,
-			"MaxResults": 5,
-			"FilterCountries": ["CAN"],
-			"FilterCategories": ["AddressType"],
-			"BiasPosition": [ -79.93024131838833, 46.02582898725067], // Set to a location near Huntsville	
-		});
-     console.log('suggestions: ', suggestions);
-    var results = suggestions.data.Results.map((e) => { return {label: e.Text, placeId: e.PlaceId } });
-		console.log('results: ', results);
-		return results;
+// Function to update address results
+async function updateAddressResults(){
+  console.log('search watch: ', search.value);
+  selectedAddress.value = null;
+  if(search.value === ''){
+    addressResults.value = [];
+  } else {
+    const newAddressResults = await addressAutoComplete(search.value);
+    addressResults.value = newAddressResults;
   }
+  console.log('addr res', addressResults.value, addressResults.value.length);
+}
+
+// Function to fetch place details for the selected address
+async function searchForAddressRiding(){
+  if (selectedAddress.value) {
+    await getPlace(selectedAddress.value.placeId);
+    addressResults.value = addressResults.value.filter(e => e.placeId == selectedAddress.value.placeId);
+  }
+}
+
+// Function to fetch place details from Netlify function
+async function getPlace(placeId) {
+  try {
+    // Fetch the place details from Netlify function
+    const response = await fetch('/.netlify/functions/geoCode', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ placeId })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('placeResult', data);
+    const point = data.Place.Geometry.Point;
+
+    // Fetch representatives from Open API using lat/long
+    const representativesResponse = await fetch(`https://represent.opennorth.ca/representatives/?point=${point[1]},${point[0]}`);
+
+    if (!representativesResponse.ok) {
+      throw new Error(`HTTP error! status: ${representativesResponse.status}`);
+    }
+
+    // Read the response body as JSON
+    const representatives = await representativesResponse.json();
+    console.log('representatives', representatives);
+    const ridingInfo = representatives.objects.filter(e => e.representative_set_name === 'Legislative Assembly of Ontario')[0];
+    console.log(ridingInfo);
+    // Update the state with the representatives data if needed
+    ridingResult.value = {
+      riding: ridingInfo.district_name,
+      mpp: ridingInfo.name,
+      party: ridingInfo.party_name,
+    };
+  } catch (error) {
+    console.error('Error fetching place details or representatives:', error);
+  }
+}
+
+// Function to fetch address suggestions from Netlify function
+async function addressAutoComplete(text) {
+  try {
+    const response = await fetch('/.netlify/functions/findAddress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ Text: text })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('suggestions: ', data);
+    if (!data.Results || data.Results.length === 0) {
+      console.log('no results')
+      return [];
+    }
+    return data.Results.map((e) => ({ label: e.Text, placeId: e.PlaceId }));
+  } catch (error) {
+    console.error('Error fetching address suggestions:', error);
+    return [];
+  }
+}
 </script>
 
 <template>
   <input
     v-model="search"
     type="text"
+    placeholder="Enter your address"
   >
   <div
     v-if="addressResults.length > 0"
@@ -74,7 +123,7 @@
     <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white list-none">
       <li
         v-for="address in addressResults"
-        :key="address.label"
+        :key="address.placeId"
         class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
       >
         <div class="flex items-center ps-3">
@@ -93,7 +142,12 @@
         </div>
       </li>
     </ul>
+    <div v-if="ridingResult?.riding">
+      Riding info:
+      <pre>{{ ridingResult }}</pre>
+    </div>
   </div>
 </template>
+
 <style scoped>
 </style>

@@ -1,21 +1,21 @@
 <template>
-  <NuxtLayout>
-    <TboAuthenticator>
-      <h1>Welcome to Take Back Ontario!</h1>
-      <p>You signed up with referral code: {{ referralCode }}</p>
-      <h2>Onboarding questions:</h2>
-      <div class="p-5">
-        <form
-          class="space-y-5"
-          @submit.prevent="finishSignUp"
+  <div class="page-container">
+    <NuxtLayout name="bare">
+      <div class="signup-header">
+        <img
+          src="/img/tbo-trillium.png"
+          class="tbo-trillium"
         >
-          <ProfileEmailPermission />
-          <ProfileRidingSelector />
-          <TboButton>Finish Sign Up</TboButton>
-        </form>
+        <h2>Sign up for Take Back Ontario</h2>
+        <p class="prose-slate text-center">
+          We never give or sell your information to anyone.
+          Being a member is free. A referral code is mandatory. If you don&apos;t have one, please email <a href="mailto:xander.miller@takebackontario.ca">Xander Miller</a> to set up a face-to-face conversation.
+        </p>
       </div>
-    </TboAuthenticator>
-  </NuxtLayout>
+      <ProfileRidingSelector />
+      <TboButton>Finish Sign Up</TboButton>
+    </NuxtLayout>
+  </div>
 </template>
 
 <script setup>
@@ -23,11 +23,13 @@ import { fetchUserAttributes } from '@aws-amplify/auth';
 import { useAuthenticator } from "@aws-amplify/ui-vue";
 import { useUserStore } from '~/store/user';
 import { ref, watch, toRefs } from 'vue';
+import { useAuthStore } from '~/store/auth';
 
 const { route } = toRefs(useAuthenticator());
 const userStore = useUserStore();
 const referralCode = ref('');
 const emailPermission = ref('');
+const authStore = useAuthStore();
 
 watch(route, async () => {
   console.log('Route changed:', route.value);
@@ -78,4 +80,24 @@ const finishSignUp = () => {
 
 </script>
 
-<style scoped></style>
+<style>
+body {
+  background-color: white;
+}
+
+.signup-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 500px;
+}
+.tbo-trillium {
+  width: 100px;
+  height: 96.7px;
+
+}
+</style>

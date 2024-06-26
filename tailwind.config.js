@@ -10,33 +10,11 @@ module.exports = {
 theme: {
   extend:{
     colors:{
-      tboBlue: {
-        DEFAULT: '#3893C5',
-        50: '#C6E0EF',
-        100: '#B6D8EA',
-        200: '#96C7E1',
-        300: '#76B6D8',
-        400: '#57A4CF',
-        500: '#3893C5',
-        600: '#2C7299',
-        700: '#1F526E',
-        800: '#133142',
-        900: '#061116',
-        950: '#000000'
+      tboblue: {
+        DEFAULT: '#3494c4'
       },
-      tboRed: {
-        DEFAULT: '#B5352C',
-        50: '#EBB1AD',
-        100: '#E7A29D',
-        200: '#DF837C',
-        300: '#D7645B',
-        400: '#CF443B',
-        500: '#B5352C',
-        600: '#882821',
-        700: '#5B1B16',
-        800: '#2E0D0B',
-        900: '#000000',
-        950: '#000000'
+      tbored: {
+        DEFAULT: '#b6362d'
       }
     }
   }
@@ -47,6 +25,7 @@ theme: {
   plugins: [
     tailwindTypography,
     require('flowbite/plugin'),
+    require('@tailwindcss/forms'),
   ],
   content: [
     'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx,vue}',

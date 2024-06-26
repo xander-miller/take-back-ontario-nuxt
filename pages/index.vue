@@ -32,7 +32,7 @@
           class="tbo-hero"
         >
         <nuxt-link
-          to="/welcome"
+          to="/join"
         >
           <button class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow">
             Join

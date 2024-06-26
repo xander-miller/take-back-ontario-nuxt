@@ -2,7 +2,7 @@ html {
   background: #e9e9ea;
 }
 a {
-  color: #ed2228;
+  color: #3494c4;
   text-decoration: none;
 }
 a:hover {
@@ -18,7 +18,7 @@ main {
   line-height: 1.6;
 }
 .btn {
-  background-color: #ed2228;
+  background-color: #3494c4;
   color: #fff;
   padding: 1rem 2rem;
   border-radius: 8px;

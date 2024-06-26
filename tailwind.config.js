@@ -1,12 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindTypography from '@tailwindcss/typography'
+import withMT from "@material-tailwind/html/utils/withMT";
 
-const path = require('path');
-
-// Assuming your Nuxt project's source files are in the project root directory
-const srcDir = path.resolve(__dirname);
-
-module.exports = {
+module.exports = withMT({
 theme: {
   extend:{
     colors:{
@@ -24,7 +20,6 @@ theme: {
   },
   plugins: [
     tailwindTypography,
-    require('flowbite/plugin'),
     require('@tailwindcss/forms'),
   ],
   content: [
@@ -41,4 +36,4 @@ theme: {
     'error.{js,ts,vue}',
     'content/**/*.md'
   ],
-};
+});

@@ -53,7 +53,7 @@
             </div>
           </form>
           <p class="text-sm italic">
-            By creating an account, you agree that Take Back Ontario may contact you for meeting and event reminders, and for the purposes of managing your account.
+            By creating an account, you agree that Take Back Ontario may contact you for meeting and event announcements, and for the purposes of managing your account.
           </p>
         </template>
         <SignUp />
@@ -65,15 +65,10 @@
 <script setup lang="js">
 import { Authenticator, useAuthenticator, SignUp } from '@aws-amplify/ui-vue';
 import '@aws-amplify/ui-vue/styles.css';
-import { useAuthStore } from '~/store/auth';
-import { useUserStore } from '~/store/user';
 import { toRefs, watch, ref, computed } from 'vue';
 import FormInput from '../components/FormInput.vue';
 
 const { route } = toRefs(useAuthenticator());
-
-const authStore = useAuthStore();
-const userStore = useUserStore();
 
 const amplifyFormValidationErrors = ref({});
 
@@ -186,10 +181,6 @@ const validateForm = () => {
   amplifyFormValidationErrors.value = errors;
 };
 
-const isFormValid = computed(() => {
-  return Object.keys(amplifyFormValidationErrors.value).length === 0;
-});
-
 const services = ref({
   async validateCustomSignUp() {
     validateForm();
@@ -200,7 +191,7 @@ const services = ref({
 watch(route, async () => {
   console.log('Route changed:', route.value);
   if (route.value === 'authenticated') {
-    console.log('User has logged in');
+    await navigateTo('/welcome');
   }
 }, { immediate: true });
 

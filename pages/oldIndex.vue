@@ -47,8 +47,7 @@
   </div>
 </template>
 <script setup>
-import { useRouter } from 'vue-router';
-const router = useRouter();
+
 // import tboLogo from '~/assets/tbo-logo.png';
 
 useHead({
@@ -66,12 +65,6 @@ const openModal = () => {
   }
 };
 
-const goToBlogPage = () => {
-  router.push('/blog');
-};
-const goToPage = (page) => {
-  router.push(page);
-}
 </script>
 
 <style scoped>

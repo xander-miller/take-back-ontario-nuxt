@@ -10,6 +10,9 @@
 * [AWS Amplify for Cognito authentication](https://docs.amplify.aws/javascript/start)
 ## Setup
 
+## Component library
+[Material Tailwind](https://www.material-tailwind.com/)
+
 ### General 
 make sure you have netlify cli installed globally
 ```Bash
@@ -52,6 +55,8 @@ Use `netlify link` to be able to access environment variables. You need access t
 9. The next time you run `npm run dev` the app will be using the `dev` environment to do auth
 
 ## Development 
+
+make sure you have `nvm` installed and run `nvm use` inside the root directory. Needs node 20.9.0.
 
 Before starting the dev server you must spin up the development neo4j server using docker-compose.
 ```bash

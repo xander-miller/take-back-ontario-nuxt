@@ -6,13 +6,13 @@
           src="/img/tbo-trillium.png"
           class="tbo-trillium"
         >
-        <h2>Sign up for Take Back Ontario</h2>
+        <h2>Welcome to Take Back Ontario!</h2>
         <p class="prose-slate text-center">
-          We never give or sell your information to anyone.
-          Being a member is free. A referral code is mandatory. If you don&apos;t have one, please email <a href="mailto:xander.miller@takebackontario.ca">Xander Miller</a> to set up a face-to-face conversation.
+          Let&rsaquo;s get you set up.
+          Use the tools below to select or find your electoral district.
         </p>
       </div>
-      <ProfileRidingSelector />
+      <RidingSelector />
       <TboButton>Finish Sign Up</TboButton>
     </NuxtLayout>
   </div>
@@ -24,6 +24,7 @@ import { useAuthenticator } from "@aws-amplify/ui-vue";
 import { useUserStore } from '~/store/user';
 import { ref, watch, toRefs } from 'vue';
 import { useAuthStore } from '~/store/auth';
+import RidingSelector from '~/components/RidingSelector.vue';
 
 const { route } = toRefs(useAuthenticator());
 const userStore = useUserStore();

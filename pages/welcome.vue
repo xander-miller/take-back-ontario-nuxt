@@ -1,5 +1,8 @@
 <template>
-  <div class="page-container">
+  <div 
+    class="page-container"
+    style="padding-top: 60px;"
+  >
     <NuxtLayout name="bare">
       <div class="signup-header">
         <img
@@ -8,12 +11,25 @@
         >
         <h2>Welcome to Take Back Ontario!</h2>
         <p class="prose-slate text-center">
-          Let&rsaquo;s get you set up.
+          Let&rsquo;s get you set up.
           Use the tools below to select or find your electoral district.
         </p>
       </div>
-      <RidingSelector />
-      <TboButton>Finish Sign Up</TboButton>
+      <div class="mainbody mb-12 flex flex-col content-center justify-center">
+        <RidingSelector class="flex-none grow" />
+        <div class="flex justify-center">
+          <TboButton
+            class="max-w-40"
+            @click.prevent="authStore.signOutUser"
+          >
+            Finish Sign Up
+          </TboButton>
+        </div>
+        <a
+          style="display:none;"
+          @click.prevent="authStore.signOutUser"
+        >Sign Out</a>
+      </div>
     </NuxtLayout>
   </div>
 </template>
@@ -38,46 +54,12 @@ watch(route, async () => {
     try {
       const userAttributes = await fetchUserAttributes();
       console.log('user attributes in welcome:', userAttributes);
-      // referralCode.value = userAttributes['custom:referral_code'];
-
-      // // Check if the user exists in Neo4j
-      // const userExists = await checkUserExistsInNeo4j(userAttributes['sub']);
-      // if (userExists) {
-      //   // Fetch user data from Neo4j and populate the store
-      //   const userData = await fetchUserDataFromNeo4j(userAttributes['sub']);
-      //   populateUserStore(userData);
-      // } else {
-      //   // Set user information in Pinia store for new users
-      //   userStore.setId(userAttributes['sub']);
-      //   userStore.setName(userAttributes['name']);
-      //   userStore.setEmail(userAttributes['email']);
-      //   userStore.setJoined(new Date().toISOString());
-      //   userStore.setPhone(userAttributes['phone_number']);
-      //   userStore.setRole(userAttributes['custom:role']);
-      //   userStore.setRiding(userAttributes['custom:riding']);
-      //   userStore.setLastAccess(new Date().toISOString());
-      //   userStore.setCanContact(userAttributes['custom:can_contact'] === 'true');
-
-        // Send user data to Netlify function
-        // await sendUserDataToNetlify({
-        //   Username: userAttributes['email'],
-        //   UserAttributes: [
-        //     { Name: 'email', Value: userAttributes['email'] },
-        //     { Name: 'custom:referral_code', Value: userAttributes['custom:referral_code'] }
-        //   ],
-        //   ClientId: userAttributes['sub']
-        // });
-      // }
     } catch (error) {
       console.error(error);
     }
   }
 });
 
-const finishSignUp = () => {
-  // Additional sign-up logic can be placed here
-  // e.g., updating other user store fields based on form input
-};
 
 </script>
 
@@ -100,5 +82,12 @@ body {
   width: 100px;
   height: 96.7px;
 
+}
+</style>
+<style scoped>
+.mainbody {
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>

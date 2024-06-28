@@ -10,25 +10,28 @@
 * [AWS Amplify for Cognito authentication](https://docs.amplify.aws/javascript/start)
 ## Setup
 
-## Component library
-[Material Tailwind](https://www.material-tailwind.com/)
-
 ### General 
-make sure you have netlify cli installed globally
-```Bash
-npm install netlify-cli -g
-```
+
 [Get the MDC - Markdown Components VScode extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc)
 
 [Get the Nuxt Assistant Chrome extension](https://chromewebstore.google.com/detail/nuxt-assistant/nebkdnlhchcbbjpgfmhifafhfjipphgi)
 
 [Get the Tailwind VScode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
+## Component library
+[Material Tailwind](https://www.material-tailwind.com/)
+
+Material Tailwind has some optional components, like tabs, and optional funcitonality, like Google's ripple effect, that require JS scripts. These scripts should be loaded in /plugins/client-only-script.js because otherwise Nuxt tries to render them as part of SSR, and you get hydration errors, amongst other things.
+
 ### Netlify
+make sure you have netlify cli installed globally
+```Bash
+npm install netlify-cli -g
+```
 Use `netlify link` to be able to access environment variables. You need access to the netlify project in order to do so.
 
 ### Docker
-- Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running.
+- Ensure you have [Docker](https://docs.docker.com/engine/install/) setup and running. NOTE: I have temporarily removed docker requirement because I'm developing straight on the Neo4j server. Will add a neo4j docker back in soon. - MH
 
 ### Amplify
 
@@ -58,7 +61,7 @@ Use `netlify link` to be able to access environment variables. You need access t
 
 make sure you have `nvm` installed and run `nvm use` inside the root directory. Needs node 20.9.0.
 
-Before starting the dev server you must spin up the development neo4j server using docker-compose.
+Before starting the dev server you must spin up the development neo4j server using docker-compose. - NOTE: See above regarding Docker - MH. TL;DR, not required at the moment.
 ```bash
 # Keep this running in another terminal
 docker-compose up
@@ -74,4 +77,4 @@ npm run dev
 
 ## Neo4j
 
-In order to query/mutate neo4j see the [nuxt-neo4j Usage](https://nuxt.com/modules/neo4j#usage) section.
+Neo4j queries should be run in netlify functions to avoid exposing the credentials to the front end.

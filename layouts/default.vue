@@ -1,5 +1,4 @@
 <template>
-  <SiteHeader />
   <TopBar />
   <QueensParkImage />
   <h1 v-if="page">

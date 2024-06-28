@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
-
+       
       ]
     }
   },
@@ -71,6 +71,7 @@ export default defineNuxtConfig({
     './runtimeConfig': './runtimeConfig.browse'
   },
   plugins: [
-    { src: '~/plugins/amplify.js', mode: 'client' }
+    { src: '~/plugins/amplify.js', mode: 'client' },
+    { src: '~/plugins/client-only-script.js', mode: 'client' }
   ]
 });

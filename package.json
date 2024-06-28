@@ -28,7 +28,7 @@
     "nuxt": "^3.10.3",
     "pinia": "^2.1.7",
     "remark-oembed": "^1.2.2",
-    "vue": "^3.4.21"
+    "vue": "3.3.13"
   },
   "devDependencies": {
     "@material-tailwind/html": "^2.2.2",
@@ -40,5 +40,6 @@
     "eslint-plugin-vue": "^9.23.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "overrides": { "vue": "3.3.13" }
 }

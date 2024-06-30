@@ -13,6 +13,7 @@ import { onMounted, ref } from 'vue'
   onMounted(() => {
     const event = new Event('load-client-side-scripts');
     window.dispatchEvent(event);
+    window.removeEventListener('load-client-side-scripts', () => {});
   })
 </script>
 

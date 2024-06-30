@@ -7,11 +7,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       scriptTabs.src = 'https://unpkg.com/@material-tailwind/html@latest/scripts/tabs.js';
       scriptTabs.async = true;
       document.head.appendChild(scriptTabs);
-      
-      const scriptRipple = document.createElement('script');
-      scriptRipple.src = 'https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js';
-      scriptRipple.async = true;
-      document.head.appendChild(scriptRipple);
     }
     window.addEventListener('load-client-side-scripts', loadClientSideScripts);
   }

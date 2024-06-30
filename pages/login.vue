@@ -13,7 +13,6 @@
       </div>
       <authenticator
         initial-state="login"
-        :services="services"
         :form-fields="authenticatorFormFields"
       >
         <template #sign-up-fields>

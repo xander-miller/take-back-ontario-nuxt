@@ -20,15 +20,11 @@
         <div class="flex justify-center">
           <TboButton
             class="max-w-40"
-            @click.prevent="authStore.signOutUser"
+            @click.prevent=""
           >
             Finish Sign Up
           </TboButton>
         </div>
-        <a
-          style="display:none;"
-          @click.prevent="authStore.signOutUser"
-        >Sign Out</a>
       </div>
     </NuxtLayout>
   </div>
@@ -47,6 +43,11 @@ const userStore = useUserStore();
 const referralCode = ref('');
 const emailPermission = ref('');
 const authStore = useAuthStore();
+
+definePageMeta({
+  middleware: 'auth'
+});
+
 
 watch(route, async () => {
   console.log('Route changed:', route.value);

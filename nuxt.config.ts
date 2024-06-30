@@ -2,7 +2,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
-       
       ]
     }
   },

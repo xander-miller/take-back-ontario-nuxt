@@ -18,7 +18,7 @@ export const handler = async (event) => {
     const key = process.env.LOCATION_API_KEY;
 
     if (!url || !key) {
-      return { statusCode: 500, body: JSON.stringify({ error: 'Missing API configuration' }) };
+      return { statusCode: 401, body: JSON.stringify({ error: 'Missing API configuration' }) };
     }
 
     // Construct the request URL

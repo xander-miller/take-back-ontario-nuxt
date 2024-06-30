@@ -2,9 +2,7 @@ import { useAuthStore } from '~/store/auth';
 import { fetchAuthSession } from 'aws-amplify/auth';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (process.client) {
-    console.log('To:', to.path);
-    console.log('From:', from.path);
+  if (import.meta.browser) {
     const authStore = useAuthStore();
     let authSession;
     try {

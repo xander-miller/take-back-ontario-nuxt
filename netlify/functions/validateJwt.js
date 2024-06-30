@@ -1,6 +1,6 @@
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 
-// Takes the full event from the netlify function to avoid duplication of code.
+// Takes the full event from the netlify function to avoid duplication of code, or just { body: { jwt } }.
 // Returns a decoded JWT or throws an error, so make sure to use try/catch when calling this function.
 export const validateJwt = async (event) => {
   const { jwt } = JSON.parse(event.body);

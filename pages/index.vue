@@ -43,7 +43,7 @@
       <div />
       <div class="simple-nav">
         <NuxtLink
-          to="welcome"
+          to="login"
           class="front-button"
         >
           Log In

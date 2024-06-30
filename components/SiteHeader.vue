@@ -10,7 +10,6 @@
 
 <script setup>
 import { useAuthStore } from '~/store/auth';
-import SiteHeaderLink from './SiteHeaderLink.vue';
 
 const authStore = useAuthStore();
 const navigation = [

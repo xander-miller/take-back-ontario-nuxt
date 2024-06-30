@@ -19,8 +19,9 @@ export const useAuthStore = defineStore('auth', () => {
   const signOutUser = async () => {
     amplifySignout();
     userStore.reset();
+    jwt.value = null;
+    userAttributes.value = null;
     await navigateTo('/welcome');
-
   };
 
   watch(jwt, async (newJwt) => {

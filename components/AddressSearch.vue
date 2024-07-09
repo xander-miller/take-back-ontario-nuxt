@@ -1,6 +1,7 @@
 <script setup>
 import debounce from 'lodash.debounce';
 import { ref, watch } from 'vue';
+import FormInput from './FormInput.vue';
 
 const addressResults = ref([]);
 const search = ref('');
@@ -109,22 +110,25 @@ async function addressAutoComplete(text) {
 </script>
 
 <template>
-  <input
+  <FormInput
+    id="searchbox"
     v-model="search"
+    class="mt-4"
     type="text"
-    placeholder="Enter your address"
-  >
+    name="search"
+    label="Enter your address"
+  />
   <div
     v-if="addressResults.length > 0"
   >
-    <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
-      Select your address:
+    <h3 class="mb-4 font-semibold text-gray-500">
+      Select your address from the list
     </h3>
-    <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white list-none">
+    <ul class="w-full text-sm mb-4 font-medium text-gray-500 rounded-lg bg-gray-200 list-none">
       <li
         v-for="address in addressResults"
         :key="address.placeId"
-        class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+        class="w-full border-gray-500 rounded-t-lg font-semibold"
       >
         <div class="flex items-center ps-3">
           <input
@@ -133,18 +137,25 @@ async function addressAutoComplete(text) {
             type="radio"
             :value="address"
             name="list-radio"
-            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            class="w-4 h-4 text-tboblue bg-gray-100 focus:ring-tboblue focus:ring-2"
           >
           <label
             :for="address.placeId"
-            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            class="w-full py-3 ms-2 text-sm font-medium text-gray-700"
           > {{ address.label }} </label>
         </div>
       </li>
     </ul>
     <div v-if="ridingResult?.riding">
-      Riding info:
-      <pre>{{ ridingResult }}</pre>
+      <h3 class="mb-4 mt-4 font-semibold text-gray-500">
+        We found your riding!
+      </h3>
+      <p class="text-gray-700">
+        Riding: <strong>{{ ridingResult.riding }}</strong>
+      </p>
+      <p class="text-gray-700">
+        MPP: {{ ridingResult.mpp }}, {{ ridingResult.party }}
+      </p>
     </div>
   </div>
 </template>

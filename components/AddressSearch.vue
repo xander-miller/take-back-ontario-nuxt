@@ -1,12 +1,14 @@
 <script setup>
 import debounce from 'lodash.debounce';
-import { ref, watch } from 'vue';
+import { ref, watch, defineEmits } from 'vue';
 import FormInput from './FormInput.vue';
 
 const addressResults = ref([]);
 const search = ref('');
 const selectedAddress = ref();
 const ridingResult = ref();
+
+const emit = defineEmits(['update:ridingId']);
 
 // Watch search input and debounce the updateAddressResults function
 watch(search, debounce(() => {
@@ -15,6 +17,48 @@ watch(search, debounce(() => {
 
 // Watch selectedAddress and fetch place details when changed
 watch(selectedAddress, searchForAddressRiding);
+
+watch(ridingResult, async (newValue) => {
+  try {
+    const ridingId = await getDistrictExternalId(newValue.riding);
+    emit('update:ridingId', ridingId);
+    console.log('ridingResult changed', ridingId);
+  } catch (error) {
+    console.error('Error fetching district external ID:', error);
+  }
+});
+
+async function getDistrictExternalId(districtName) {
+    try {
+        // Encode the district name for use in a URL
+        const encodedDistrictName = encodeURIComponent(districtName);
+
+        // Fetch data from the API
+        const response = await fetch(`https://represent.opennorth.ca/boundaries/?name=${encodedDistrictName}`);
+        
+        // Check if the response is ok (status 200)
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const data = await response.json();
+
+        // Filter the objects to find the one with the correct boundary_set_name
+        const district = data.objects.find(obj => obj.boundary_set_name === "Ontario electoral district");
+
+        // Check if we found the correct district
+        if (!district) {
+            throw new Error(`District not found for name: ${districtName}`);
+        }
+
+        // Return the external_id
+        return district.external_id;
+    } catch (error) {
+        console.error('Error fetching district external ID:', error);
+        throw error; // Rethrow the error to let the caller handle it
+    }
+}
 
 // Function to update address results
 async function updateAddressResults(){
@@ -74,6 +118,7 @@ async function getPlace(placeId) {
       riding: ridingInfo.district_name,
       mpp: ridingInfo.name,
       party: ridingInfo.party_name,
+      ridingId: ridingInfo.district_id
     };
   } catch (error) {
     console.error('Error fetching place details or representatives:', error);

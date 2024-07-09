@@ -45,9 +45,12 @@ export const handler = async (event) => {
 
     const data = await response.json();
 
+    // Filter results to only include addresses in Ontario
+    const ontarioAddresses = data.Results.filter(item => item.Text.includes(" ON,"));
+
     return {
       statusCode: 200,
-      body: JSON.stringify(data)
+      body: JSON.stringify({ Results: ontarioAddresses })
     };
   } catch (error) {
     return {

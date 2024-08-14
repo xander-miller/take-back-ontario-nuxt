@@ -77,6 +77,15 @@
 
 <script setup>
 import CnTowerChevron from '~/components/CnTowerChevron.vue';
+import { useAuthStore } from '~/store/auth';
+import { onMounted } from 'vue';
+
+const authStore = useAuthStore();
+
+onMounted(() => {
+  console.log('mounted');
+  authStore.signOutUser();
+});
 </script>
 
 <style scoped>

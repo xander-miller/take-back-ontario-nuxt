@@ -6,11 +6,7 @@ export default defineNuxtConfig({
     }
   },
   // Modules
-  modules: [
-    "@nuxt/content",
-    "@nuxtjs/tailwindcss",
-    '@pinia/nuxt'
-  ],
+  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", '@pinia/nuxt', "@nuxt/image"],
   buildModules:[
     "@nuxtjs/dotenv"
   ],

@@ -1,10 +1,12 @@
 import { validateJwt } from '../validateJwt.js';
 import { getNeo4jSession } from '../getNeo4jSession.js';
 
-const handler = async function (event, context) {
+const handler = async function (event) {
   let decodedJwt = null;
-
+  let eventBody = null;
+  console.log('Event:', event)
   // Validate and decode the JWT - pass function event.
+
   try {
     decodedJwt = await validateJwt(event);
     if (!decodedJwt || !decodedJwt.sub) {
@@ -14,6 +16,16 @@ const handler = async function (event, context) {
     return {
       statusCode: 401,
       body: JSON.stringify({ message: 'Unauthorized', error }),
+    };
+  }
+
+  try {
+    eventBody = JSON.parse(event.body);
+    console.log('Event body:', eventBody);
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Invalid request body', error }),
     };
   }
 
@@ -27,19 +39,16 @@ const handler = async function (event, context) {
   }
 
   try {
-    const email = decodedJwt.email;
-    const referralCode = decodedJwt['custom:referral_code'];
-    const cognitoId = decodedJwt.sub;
-
+    const { email, referredByCode, id, emailVerified, phone, name } = eventBody;
     // Check if referral code exists
-    console.log(`Checking if referral code exists: ${referralCode}`);
+    console.log(`Checking if referral code exists: ${referredByCode}`);
     const referralResult = await session.run(
-      'MATCH (referrer:User) WHERE $referralCode IN referrer.referralCodes RETURN referrer',
-      { referralCode }
+      'MATCH (referrer:User) WHERE $referredByCode IN referrer.referralCodes RETURN referrer',
+      { referredByCode }
     );
 
     if (referralResult.records.length === 0) {
-      console.log(`Referral code ${referralCode} not found`);
+      console.log(`Referral code ${referredByCode} not found`);
       return {
         statusCode: 404,
         body: JSON.stringify({ error: 'Referral code not found' }),
@@ -56,23 +65,29 @@ const handler = async function (event, context) {
     const createUserQuery = `
       MATCH (referrer:User {id: $referrerId})
       CREATE (newUser:User {
+        id: $id,
+        name: $name,
         email: $email,
-        id: $cognitoId,
+        phone: $phone,
         referralCodes: [],
-        joined: datetime()
+        joined: datetime(),
+        emailVerified: $emailVerified
       })
-      CREATE (referrer)-[:REFERS {referralCode: $referralCode, notes: '', dateOfReferral: datetime(), lastContact: datetime(), preferredContactMethod: ''}]->(newUser)
+      CREATE (referrer)-[:REFERS {referralCode: $referredByCode, notes: '', dateOfReferral: datetime(), lastContact: datetime(), preferredContactMethod: ''}]->(newUser)
       CREATE (referrer)-[:FRIENDS {becameFriends: datetime()}]->(newUser)
       CREATE (newUser)-[:FRIENDS {becameFriends: datetime()}]->(referrer)
       RETURN newUser
     `;
 
-    console.log(`Creating new user with ID: ${cognitoId}`);
+    console.log(`Creating new user with ID: ${id}`);
     const createUserResult = await session.run(createUserQuery, {
+      id,
+      name,
       email,
-      cognitoId,
-      referralCode,
-      referrerId
+      phone,
+      referredByCode,
+      referrerId,
+      emailVerified,
     });
 
     const newUser = createUserResult.records[0].get('newUser');

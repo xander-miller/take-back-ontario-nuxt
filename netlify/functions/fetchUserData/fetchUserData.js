@@ -35,7 +35,6 @@ export const handler = async (event) => {
       { cognitoId }
     );
 
-
     if (result.records.length === 0) {
       return {
         statusCode: 404,

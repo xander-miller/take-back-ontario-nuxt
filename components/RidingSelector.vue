@@ -1,18 +1,26 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { useUserStore } from '~/store/user';
 
-  const ridingId = ref(null);
+const userStore = useUserStore();
 
-  onMounted(() => {
-    const event = new Event('load-client-side-scripts');
-    window.dispatchEvent(event);
-    window.removeEventListener('load-client-side-scripts', () => {});
-  });
+const ridingId = ref(null);
 
-  const updateRidingId = (id) => {
-    console.log('Riding ID:', id);
-    ridingId.value = id;
-  };
+onMounted(() => {
+  const event = new Event('load-client-side-scripts');
+  window.dispatchEvent(event);
+  window.removeEventListener('load-client-side-scripts', () => {});
+});
+
+const updateRidingId = (id) => {
+  console.log('Riding ID:', id);
+  ridingId.value = id;
+};
+
+watch(ridingId, (newValue) => {
+  console.log('Riding ID changed:', newValue);
+  userStore.setRiding(newValue);
+});
 </script>
 
 <template>

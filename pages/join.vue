@@ -97,9 +97,9 @@ const formFields = ref([
   },
   {
     required: true,
-    id: 'phone',
+    id: 'phone-number',
     type: 'tel',
-    name: 'phone',
+    name: 'phone_number',
     label: 'Phone Number',
     error: '',
     errorMessage: 'A valid phone number is required',
@@ -136,6 +136,16 @@ const formFields = ref([
     label: 'Referral Code',
     error: '',
     errorMessage: 'Referral code is required',
+    value: '',
+    blur: false
+  },
+  {
+    required: true,
+    id: 'riding-contact',
+    type: 'checkbox',
+    name: 'custom:riding_contact',
+    label: 'I agree that others in my riding can contact me (recommended).',
+    error: '',
     value: '',
     blur: false
   }

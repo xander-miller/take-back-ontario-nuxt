@@ -16,7 +16,9 @@
         :form-fields="authenticatorFormFields"
       >
         <template #sign-up-fields>
-          <form class="w-full">
+          <form
+            class="w-full"
+          >
             <FormInput
               v-for="field in formFields"
               :id="field.id"
@@ -43,6 +45,8 @@ import { toRefs, watch, ref, computed } from 'vue';
 import FormInput from '../components/FormInput.vue';
 
 const { route } = toRefs(useAuthenticator());
+
+const showForm = ref(false);
 
 const formFields = ref([
   {

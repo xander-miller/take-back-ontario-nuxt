@@ -37,9 +37,17 @@
 <script setup>
 import { useUserStore } from '~/store/user';
 import RidingSelector from '~/components/RidingSelector.vue';
+import { onBeforeMount, ref } from 'vue';
 
 const userStore = useUserStore();
 const ridingId = ref(null);
+
+onBeforeMount(async () => {
+  console.log('Welcome page mounted');
+  if (userStore.user.riding) {
+    await navigateTo('/dashboard');
+  }
+});
 
 const updateRidingId = (id) => {
   console.log('updated riding id', id);

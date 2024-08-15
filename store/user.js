@@ -26,6 +26,11 @@ export const useUserStore = defineStore('user', () => {
   const user = ref(getUserTemplate());
   const jwt = ref(null);
 
+  const reset = () => {
+    user.value = getUserTemplate();
+    jwt.value = null;
+  };
+
   const mapCognitoUserToUser = (cognitoProperties) => {
     return {
       id: cognitoProperties.sub,
@@ -222,6 +227,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     user,
+    reset,
     setId,
     setName,
     setEmail,

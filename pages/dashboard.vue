@@ -64,7 +64,7 @@ onMounted(() => {
             selector: 'node',
             style: {
               'background-color': '#666',
-              label: 'data(id)'  // Use 'data(id)' if 'label' is not available
+              label: 'data(name)'  // Use 'data(id)' if 'label' is not available
             }
           },
           {

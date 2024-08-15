@@ -1,10 +1,10 @@
 <template>
-  <NuxtLayout>
-    <div v-if="authStore.authStatus === 'authenticated'">
+  <NuxtLayout name="bare">
+    <div v-if="authStore.isAuthenticated">
       <div
         id="cy"
-        ref="cy"
-        style="width: 100%; height: 5s00px; position: relative; display: block; box-sizing: border-box;"
+        ref="refcy"
+        style="width: 100%; height: 80vh; position: relative; display: block; box-sizing: border-box;"
       />
     </div>
     <div v-else>
@@ -16,7 +16,7 @@
 <script setup>
 import { useAuthStore } from '~/store/auth';
 import { useUserStore } from '~/store/user';
-import { watch, ref } from 'vue';
+import { watch, ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import cytoscape from 'cytoscape'
 
@@ -24,6 +24,7 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const cytoScapeData = ref({});
+const refcy = ref(null);
 
 definePageMeta({
   middleware: 'auth'
@@ -45,42 +46,46 @@ watch(user, async (newUser) => {
   }
 }, { immediate: true, deep: true });
 
-watch(cytoScapeData, (newData) => {
-  console.log('cytoScapeData changed:', newData);
+onMounted(() => {
+  console.log('mounted');
+  watch(cytoScapeData, (newData) => {
+    console.log('cytoScapeData changed:', newData);
 
-  if (newData.nodes && newData.edges) {
-    const cy = cytoscape({
-      container: document.getElementById('cy'),
-      elements: {
-        nodes: newData.nodes,
-        edges: newData.edges
-      },
-      style: [
-        {
-          selector: 'node',
-          style: {
-            'background-color': '#666',
-            label: 'data(id)'  // Use 'data(id)' if 'label' is not available
-          }
+    if (newData.nodes && newData.edges && refcy.value) {
+      console.log('refcy:', refcy.value);
+      const cy = cytoscape({
+        container: refcy.value,
+        elements: {
+          nodes: newData.nodes,
+          edges: newData.edges
         },
-        {
-          selector: 'edge',
-          style: {
-            'width': 3,
-            'line-color': '#ccc',
-            'target-arrow-color': '#ccc',
-            'target-arrow-shape': 'triangle'
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'background-color': '#666',
+              label: 'data(id)'  // Use 'data(id)' if 'label' is not available
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 3,
+              'line-color': '#ccc',
+              'target-arrow-color': '#ccc',
+              'target-arrow-shape': 'triangle'
+            }
           }
+        ],
+        layout: {
+          name: 'grid'
         }
-      ],
-      layout: {
-        name: 'grid'
-      }
-    });
-
-    // Optional: Perform any additional setup or updates to the Cytoscape instance
-  }
+      });
+    }
+  });
 });
+
+
 
 
 </script>

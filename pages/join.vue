@@ -171,7 +171,6 @@ const validateForm = () => {
   let errors = {};
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phonePattern = /^(?!555)\d{3}-?\d{3}-?\d{4}$/;
-  
 
   // Validate each form field
   formFields.value.forEach(field => {

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, watch, toRefs } from 'vue';
+import { ref } from 'vue';
 import { useUserStore } from './user';
 import { signOut } from 'aws-amplify/auth';
 
@@ -10,11 +10,11 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false);
 
   // Called from middlware/auth.js to kick off the auth/user hydration process.
-  const setJwt = (token) => {
+  const setJwt = async (token) => {
     console.log('Setting JWT in auth store:', token);
     jwt.value = token;
     isAuthenticated.value = true;
-    userStore.setJwt(token);
+    await userStore.initializeUser(token);
   };
 
   const signOutUser = async () => {

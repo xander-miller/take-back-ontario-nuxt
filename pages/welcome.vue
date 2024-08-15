@@ -16,11 +16,15 @@
         </p>
       </div>
       <div class="mainbody mb-12 flex flex-col content-center justify-center">
-        <RidingSelector class="flex-none grow" />
+        <RidingSelector
+          class="flex-none grow"
+          @update:riding-id="updateRidingId($event)"
+        />
         <div class="flex justify-center">
           <TboButton
             class="max-w-40"
-            @click.prevent=""
+            :disabled="!ridingId"
+            @click.prevent="finishSignUp"
           >
             Finish Sign Up
           </TboButton>
@@ -31,37 +35,27 @@
 </template>
 
 <script setup>
-import { fetchUserAttributes } from '@aws-amplify/auth';
-import { useAuthenticator } from "@aws-amplify/ui-vue";
 import { useUserStore } from '~/store/user';
-import { ref, watch, toRefs } from 'vue';
-import { useAuthStore } from '~/store/auth';
 import RidingSelector from '~/components/RidingSelector.vue';
 
-const { route } = toRefs(useAuthenticator());
 const userStore = useUserStore();
-const referralCode = ref('');
-const emailPermission = ref('');
-const authStore = useAuthStore();
+const ridingId = ref(null);
+
+const updateRidingId = (id) => {
+  console.log('updated riding id', id);
+  ridingId.value = id;
+};
 
 definePageMeta({
   middleware: 'auth'
 });
 
-
-watch(route, async () => {
-  console.log('Route changed:', route.value);
-  if (route.value === 'authenticated') {
-    try {
-      const userAttributes = await fetchUserAttributes();
-      console.log('user attributes in welcome:', userAttributes);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-});
-
-
+const finishSignUp = async () => {
+  console.log('Finishing sign up');
+  await userStore.setRiding(ridingId.value);
+  await navigateTo('/dashboard');
+  return;
+};
 </script>
 
 <style>

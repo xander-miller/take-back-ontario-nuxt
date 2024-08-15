@@ -14,9 +14,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       const jwt = authSession.tokens.idToken.toString();
       if (!jwt) {
         console.warn('No JWT found in auth session. Redirecting to /');
-        return navigateTo('/')
+        return navigateTo('/');
       }
-      authStore.setJwt(jwt);
+      await authStore.setJwt(jwt);
       console.log('User is authenticated. JWT:', jwt);
       return;
     }

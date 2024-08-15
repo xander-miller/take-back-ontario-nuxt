@@ -23,6 +23,7 @@
     "aws-jwt-verify": "^4.0.1",
     "aws-sdk": "^2.1616.0",
     "cytoscape": "^3.29.2",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "neo4j-driver": "^5.18.0",
     "node-fetch": "^3.3.2",

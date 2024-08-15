@@ -1,10 +1,7 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
-import { useUserStore } from '~/store/user';
+import { onMounted, defineEmits } from 'vue'
 
-const userStore = useUserStore();
-
-const ridingId = ref(null);
+const emit = defineEmits(['update:riding-id'])
 
 onMounted(() => {
   const event = new Event('load-client-side-scripts');
@@ -14,13 +11,9 @@ onMounted(() => {
 
 const updateRidingId = (id) => {
   console.log('Riding ID:', id);
-  ridingId.value = id;
+  emit('update:riding-id', id);
 };
 
-watch(ridingId, (newValue) => {
-  console.log('Riding ID changed:', newValue);
-  userStore.setRiding(newValue);
-});
 </script>
 
 <template>

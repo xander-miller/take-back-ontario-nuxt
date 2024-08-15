@@ -1,27 +1,92 @@
 // store/user.ts
 import { defineStore } from 'pinia';
-import { ref, watch, nextTick } from 'vue';
-import { fetchUserAttributes } from '@aws-amplify/auth';
+import { ref, nextTick } from 'vue';
+import { fetchUserAttributes, updateUserAttributes } from '@aws-amplify/auth';
+import _ from 'lodash';
 
 export const useUserStore = defineStore('user', () => {
-  const user = ref({
-    id: '',
-    name: '',
-    email: '',
-    joined: '',
-    referralCodes: [],
-    phone: '',
-    role: '',
-    riding: '',
-    lastAccess: '',
-    canContact: false,
-    referredByCode: '',
-    emailVerified: false,
-    jwt: '',
-  });
 
+  const getUserTemplate = () => {
+    return {
+      id: '',
+      name: '',
+      email: '',
+      joined: '',
+      referralCodes: [],
+      phone: '',
+      role: '',
+      riding: null,
+      lastAccess: '',
+      canContact: false,
+      referredByCode: '',
+      emailVerified: false,
+    };
+  };
 
-  const amplifyUser = ref(null);
+  const user = ref(getUserTemplate());
+  const jwt = ref(null);
+
+  const mapCognitoUserToUser = (cognitoProperties) => {
+    return {
+      id: cognitoProperties.sub,
+      name: cognitoProperties.name,
+      email: cognitoProperties.email,
+      phone: cognitoProperties.phone_number,
+      riding: cognitoProperties['custom:riding'],
+      canContact: cognitoProperties['custom:riding_contact'] === 'on',
+      referredByCode: cognitoProperties['custom:referral_code'],
+      emailVerified: cognitoProperties.email_verified,
+    };
+  }
+
+  // An object merge that doesn't overwrite existing properties with nulls, undefined or empty
+  const mergeKeepingValues = (target, source) => {
+    for (let key in source) {
+      if (source[key] !== null && source[key] !== undefined && source[key] !== '') {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+
+  // Initializes the user: hydrate (fetch data from neo4j), create (new user if not exist), update (if cognito attributes have changed). Called from auth store. Takes a JWT.
+  const initializeUser = async (token) => {
+    console.log('initializeUser', token);
+    if (!token) throw new Error('No JWT provided to initializeUser');
+    if (jwt.value === token) return;
+    jwt.value = token;
+    try {
+      const cognitoAttributes = await fetchUserAttributes();
+      const exists = await checkUserExistsInNeo4j(jwt.value);
+      if (exists) {
+        console.log('User exists in Neo4j');
+        const userTemplate = getUserTemplate();
+        userTemplate.lastAccess = new Date().toISOString();
+        const neo4jUser = mergeKeepingValues(userTemplate, await fetchUserDataFromNeo4j(jwt.value));
+        const userWithCognitoAttributes = mergeKeepingValues(neo4jUser, mapCognitoUserToUser(cognitoAttributes));
+        console.log('userWithCognitoAttributes', userWithCognitoAttributes);
+        if (!_.isEqual(user.value, userWithCognitoAttributes)) {
+          user.value = userWithCognitoAttributes;
+          console.log('User object has changed. Updating Neo4j.');
+          await updateUserDataInNeo4j({ ...user.value, jwt: jwt.value });
+        } else {
+          console.log('User object is the same as Neo4j. No need to update.');
+        }
+      } else {
+        console.log('User does not exist in Neo4j. Creating.');
+        const userTemplate = getUserTemplate();
+        const updatedUser = mergeKeepingValues(userTemplate, mapCognitoUserToUser(cognitoAttributes));
+        updatedUser.joined = new Date().toISOString();
+        updatedUser.lastAccess = new Date().toISOString();
+        updatedUser.jwt = jwt.value;
+        console.log('updatedUser', updatedUser);
+        user.value = updatedUser;
+        await createUserDataInNeo4j();
+      }
+    } catch (error) {
+      console.error('Error initializing JWT:', error);
+    }
+  };
 
   const setUserProperty = async (property, value) => {
     console.log('setUserProperty', property, value);
@@ -31,69 +96,38 @@ export const useUserStore = defineStore('user', () => {
       user.value[property] = value;
     }
     await nextTick();
+    await updateUserDataInNeo4j(user.value);
     console.log('Current user.value', user.value);
   };
 
   const setId = (sub) => setUserProperty('id', sub);
-  const setName = (userName) => setUserProperty('name', userName);
-  const setEmail = (userEmail) => setUserProperty('email', userEmail);
-  const setJoined = (timestamp) => setUserProperty('joined', timestamp);
-  const setReferralCodes = (codes) => setUserProperty('referralCodes', codes);
-  const setPhone = (userPhone) => setUserProperty('phone', userPhone);
-  const setRole = (userRole) => setUserProperty('role', userRole);
-  const setRiding = (userRiding) => setUserProperty('riding', userRiding);
-  const setLastAccess = (timestamp) => setUserProperty('lastAccess', timestamp);
-  const setCanContact = (contact) => setUserProperty('canContact', contact);
-  const setReferredByCode = (code) => setUserProperty('referredByCode', code);
-  const setEmailVerified = (verified) => setUserProperty('emailVerified', verified);
-  const setJwt = (jwt) => setUserProperty('jwt', jwt);
-
-  // User id is set in /store/auth.js - so authentication takes place first, and then this kicks in.
-  // We watch for the jwt to change, and then we hydrate the user object.
-  watch(() => user.value.jwt, async (newJwt, oldJwt) => {
-    console.log('New JWT:', newJwt, 'Old JWT', oldJwt);
-    if (newJwt && newJwt !== oldJwt) {
-      console.log('got new JWT', newJwt);
-      try {
-        await hydrateUser(newJwt);
-      } catch (error) {
-        console.error('Error hydrating user:', error);
-      }
-    }
-  });
-
-  // Consolidates userAttributes from AWS Cognito and Neo4j record, and fetches the new Neo4j record
-  const hydrateUser = async (jwt) => {
-    let userAttributes = null;
-      // Gets cognito data. This can throw an error if the user is not authenticated.
-    userAttributes = await fetchUserAttributes();
-    console.log('got user attributes', userAttributes);
-    // If the object looks, right, set it to the amplifyUser ref.
-    if (userAttributes.sub) {
-      setName(userAttributes.name);
-      setId(userAttributes.sub);
-      setReferredByCode(userAttributes['custom:referral_code']);
-      setEmail(userAttributes.email);
-      setEmailVerified(userAttributes.email_verified);
-      setPhone(userAttributes.phone_number);
-    } else {
-      throw new Error('No valid user attributes found from Cognito after JWT change.');
-    }
-    // Check if the user exists.
-    const exists = await checkUserExistsInNeo4j(jwt);
-    if (exists) {
-      console.log('User exists in Neo4j. Here is the updated user object:', user.value);
-      await updateUserDataInNeo4j(user.value); // in case of changes in Cognito
-      const userData = await fetchUserDataFromNeo4j(jwt);
-      console.log('got user data', userData);
-      if (userData) {
-        console.log('User does not exist already, creating', userData);
-        Object.assign(user.value, userData);
-      }
-    } else {
-      createUserDataInNeo4j();
-    }
+  const setName = async (userName) => {
+    await updateUserAttributes({ userAttributes: { name: userName } });
+    await setUserProperty('name', userName);
   };
+  const setEmail = async (userEmail) => {
+    await updateUserAttributes({ userAttributes: { email: userEmail } });
+    await setUserProperty('email', userEmail);
+  };
+  const setPhone = async (userPhone) => {
+    await updateUserAttributes({ userAttributes: { phone_number: userPhone } });
+    await setUserProperty('phone', userPhone);
+  };
+  const setRiding = async (userRiding) => {
+    console.log('Attempting to set riding to:', userRiding);
+    await updateUserAttributes({ userAttributes: { 'custom:riding': userRiding } });
+    await setUserProperty('riding', userRiding);
+  };
+  const setCanContact = async (contact) => {
+    await updateUserAttributes({ userAttributes: { 'custom:riding_contact': contact } });
+    await setUserProperty('canContact', contact);
+  };
+  const setReferredByCode = async (code) => {
+    await updateUserAttributes({ userAttributes: { 'custom:referral_code': code } });
+    await setUserProperty('referredByCode', code);
+  };
+  const setReferralCodes = (codes) => setUserProperty('referralCodes', codes);
+  const setRole = (userRole) => setUserProperty('role', userRole);
 
   const checkUserExistsInNeo4j = async (jwt) => {
     const response = await fetch('/.netlify/functions/checkUserExists', {
@@ -112,6 +146,8 @@ export const useUserStore = defineStore('user', () => {
 
   const createUserDataInNeo4j = async () => {
     // This expects an amplify.user object.
+    const userData = user.value;
+    userData.jwt = jwt.value;
     try {
       const response = await fetch('/.netlify/functions/createUserData', {
         method: 'POST',
@@ -126,12 +162,11 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
-
-  const fetchUserDataFromNeo4j = async (jwt) => {
+  const fetchUserDataFromNeo4j = async () => {
     const response = await fetch('/.netlify/functions/fetchUserData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jwt })
+      body: JSON.stringify({ jwt: jwt.value })
     });
 
     if (response.status === 404) {
@@ -146,11 +181,11 @@ export const useUserStore = defineStore('user', () => {
     return userData;
   };
 
-  const fetchNetworkFromNeo4j = async (jwt) => {
+  const fetchNetworkFromNeo4j = async () => {
     const response = await fetch('/.netlify/functions/fetchNetworkGraph', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jwt })
+      body: JSON.stringify({ jwt: jwt.value })
     });
 
     if (response.status === 404) {
@@ -167,7 +202,9 @@ export const useUserStore = defineStore('user', () => {
   
 
   // Update the user data in Neo4j. Takes a user object.
-  const updateUserDataInNeo4j = async (userData) => {
+  const updateUserDataInNeo4j = async () => {
+    const userData = user.value;
+    userData.jwt = jwt.value;
     try {
       const response = await fetch('/.netlify/functions/updateUserData', {
         method: 'POST',
@@ -183,43 +220,18 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
-  const reset = () => {
-    user.value = {
-      id: '',
-      name: '',
-      email: '',
-      joined: '',
-      referralCodes: [],
-      phone: '',
-      role: '',
-      riding: '',
-      lastAccess: '',
-      canContact: false,
-      referredByCode: '',
-      emailVerified: false,
-      jwt: '',
-      hydrated: false
-    };
-    amplifyUser.value = null;
-  };
-
   return {
     user,
-    amplifyUser,
-    reset,
     setId,
     setName,
     setEmail,
-    setJoined,
     setReferralCodes,
     setPhone,
     setRole,
     setRiding,
-    setLastAccess,
     setCanContact,
     setReferredByCode,
-    setEmailVerified,
-    setJwt,
+    initializeUser,
     fetchNetworkFromNeo4j
   };
 });

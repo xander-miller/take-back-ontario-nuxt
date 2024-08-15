@@ -19,7 +19,7 @@ const handler = async function (event, context) {
    // Validate and decode the JWT - pass function event.
    try {
     console.log('trying to validate jwt', eventBody.jwt);
-    decodedJwt = await validateJwt(JSON.stringify({body: { jwt: eventBody.jwt } }));
+    decodedJwt = await validateJwt(event);
     if (!decodedJwt || !decodedJwt.sub) {
       throw new Error('No user ID found in JWT');
     }

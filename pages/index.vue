@@ -50,25 +50,55 @@
         </NuxtLink>
       </div>
       <div class="page-body-wrapper">
-        <div class="page-body prose-slate prose-xl">
+        <div class="page-body prose-slate prose-2xl">
           <h1
-            class="prose-h1"
+            class="mb-1 mt-10 text-center text-5xl max-w-5xl ml-auto mr-auto"
             style="color:#b42f2b;"
           >
-            What is Take Back Ontario?
+            Our province is broken, and it’s our&nbsp;fault...
           </h1>
-          <h2 class="prose-h2 m-0">
-            <strong>Ontario</strong> joins the Canadian <strong>"Take Back"</strong> Movement
-          </h2>
-          <p class="mt-12 mb-0">
-            <strong>Take Back Ontario</strong> is a <strong>citizen-led</strong> organization that
-            <strong>teaches Ontarians</strong> how to take back their political power in our province.
+          <p class="mt-12 max-w-5xl ml-auto mr-auto">
+            Less than half of eligible voters are turning out to the polls,
+            and civic participation is at dangerously low levels.
+            <strong>Our leaders listen to those who can fund or fire them</strong>,
+            and as our citizens disengaged from civic life,
+            moneyed and special interests gladly showed up to fill the void we left behind.
           </p>
-          <p class="mt-12 mb-0">
-            Take Back Ontario believes that informed citizens leaning into politics with
-            <strong>personal responsibility, discipline and fortitude</strong> will restore <strong>prosperity,
-              freedom</strong> and <strong>order</strong> to our institutions and province.
+          <p class="max-w-4xl ml-auto mr-auto text-3xl font-medium text-center">
+            The result? A province that no longer works for the people, but for corporations and activists.
           </p>
+          <p class="mt-12 max-w-5xl ml-auto mr-auto">
+            It’s not too late to take our province back,
+            but it requires us to show up at the right place, the right time, and in the right way.
+            By joining Take Back Ontario, you will learn how to <strong>have an outsized impact</strong> by building your own political power,
+            identifying the levers of power, and pulling those levers in effective ways.
+          </p>
+          <p class="max-w-4xl text-center text-3xl font-medium mr-auto ml-auto">
+            You can make a big difference. You just have to show up.
+          </p>
+          <div class="text-center relative">
+            I'm ready to show up!
+            <nuxt-link
+              class="text-center text-base hover:no-underline"
+              to="/join"
+            >
+              <button class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow !relative !block !transform-none !left-auto !bottom-auto mt-6 mr-auto ml-auto text">
+                Join
+                Take Back Ontario
+              </button>
+            </nuxt-link>
+          </div>
+        </div>
+        <div class="blue-triangle-separator">
+          <svg
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <polygon
+              points="50,0 100,100 -25,150"
+              style="fill: rgba(0, 150, 227, 0.7);"
+            />
+          </svg>
         </div>
       </div>
     </NuxtLayout>
@@ -77,16 +107,15 @@
 
 <script setup>
 import CnTowerChevron from '~/components/CnTowerChevron.vue';
-import { useAuthStore } from '~/store/auth';
-import { onMounted } from 'vue';
-
-const authStore = useAuthStore();
-
-onMounted(() => {
-  console.log('mounted');
-  authStore.signOutUser();
-});
 </script>
+
+<style>
+.template-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+</style>
 
 <style scoped>
 .join-button {
@@ -95,8 +124,17 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-
 }
+
+.blue-triangle-separator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 75%;
+  height: 15%;
+  transform: skewX(45deg);
+}
+
 
 svg {
   position: absolute;

@@ -56,3 +56,6 @@ amplifytools.xcconfig
 db/
 .env
 .tmp
+
+# vscode
+.vscode/

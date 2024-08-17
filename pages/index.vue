@@ -50,33 +50,65 @@
         </NuxtLink>
       </div>
       <div class="page-body-wrapper">
-        <div class="page-body prose-slate prose-2xl">
-          <h1
+        <div class="page-body prose-slate prose-2xl pb-36">
+          <p class="mt-12 max-w-5xl ml-auto mr-auto">
+            <span
+              class="mb-1 mt-10 text-left text-3xl font-bold max-w-5xl ml-0 mr-auto"
+            >
+              Our province is broken...
+            </span>
+            in an Ontario where people are struggling to find housing,
+            where the cost of living is skyrocketing, and people have little hope for the future.
+            Less than half of eligible voters are turning out to the polls,
+            and civic participation is extremely low.
+          </p>
+          <p class="mt-4 max-w-5xl ml-auto mr-auto">
+            <strong>Ontario citizens have been bullied and misled</strong> into not participating in the political process. We let the captured media and education system convince us that politics does not require our participation beyond voting for who they tell us to vote for and we stopped showing up.
+          </p>
+          <p class="mt-4 max-w-5xl ml-auto mr-auto">
+            Ontario citizens are frustrated but they are also disillusioned and disengaged.
+            <strong>Our leaders listen to those who can fund or fire them</strong>,
+            special interests no longer had any opposition and grew to fill the void we left behind.
+          </p>
+          <p class="max-w-4xl ml-0 mr-auto text-3xl font-medium text-left">
+            The result? A province that no longer works for Ontario citizens, but for corporations and activist ideologues.
+          </p>
+          <h2
+            class="mb-1 mt-10 text-center text-5xl max-w-5xl ml-0 mr-auto"
+            style="color:#b42f2b;"
+          >
+            The world is run by those who show&nbsp;up
+          </h2>
+          <p class="mt-12 max-w-5xl ml-auto mr-auto">
+            Ontario citizens stopped participating. There were special interests who convinced use to stop participating but we let ourselves be convinced. <strong>The broken state of Ontario is our fault.</strong> We stopped showing up.
+          </p>
+          <p class="mt-4 max-w-5xl ml-auto mr-auto">
+            It’s not too late to take our province back. If Ontario citizens can take responsibility for breaking Ontario, then we can also take responsibility for fixing Ontario. <strong>Ontario has levers of power that Ontario citizens can operate. </strong>
+          </p><p class="mt-4 max-w-5xl ml-auto mr-auto">
+            We have neglected the levers of power of Ontario and they are now being operated by activist ideologues and special interests. These levers of power are the citizens to take back when we show up. 
+          </p>
+          <h2
             class="mb-1 mt-10 text-center text-5xl max-w-5xl ml-auto mr-auto"
             style="color:#b42f2b;"
           >
-            Our province is broken, and it’s our&nbsp;fault...
-          </h1>
-          <p class="mt-12 max-w-5xl ml-auto mr-auto">
-            Less than half of eligible voters are turning out to the polls,
-            and civic participation is at dangerously low levels.
-            <strong>Our leaders listen to those who can fund or fire them</strong>,
-            and as our citizens disengaged from civic life,
-            moneyed and special interests gladly showed up to fill the void we left behind.
-          </p>
-          <p class="max-w-4xl ml-auto mr-auto text-3xl font-medium text-center">
-            The result? A province that no longer works for the people, but for corporations and activists.
-          </p>
+            So we show&nbsp;up
+          </h2>
           <p class="mt-12 max-w-5xl ml-auto mr-auto">
             It’s not too late to take our province back,
             but it requires us to show up at the right place, the right time, and in the right way.
             By joining Take Back Ontario, you will learn how to <strong>have an outsized impact</strong> by building your own political power,
             identifying the levers of power, and pulling those levers in effective ways.
           </p>
+          <h2
+            class="mb-1 mt-10 text-center text-5xl max-w-5xl ml-auto mr-auto"
+            style="color:#b42f2b;"
+          >
+            To take back Ontario
+          </h2>
           <p class="max-w-4xl text-center text-3xl font-medium mr-auto ml-auto">
             You can make a big difference. You just have to show up.
           </p>
-          <div class="text-center relative">
+          <div class="text-center relative pb-24">
             I'm ready to show up!
             <nuxt-link
               class="text-center text-base hover:no-underline"

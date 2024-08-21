@@ -1,51 +1,53 @@
 <template>
   <div class="page-container">
     <NuxtLayout name="bare">
-      <div class="hero-container">
-        <div class="red-triangle">
-          <div style="width: 100%; height: 100%">
+      <div class="mx-auto container">
+        <div class="hero-container">
+          <div class="red-triangle">
+            <div style="width: 100%; height: 100%">
+              <svg
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+              >
+                <polygon
+                  points="50,100 0,0 100,0"
+                  style="fill: #b42f2b"
+                />
+              </svg>
+            </div>
+          </div>
+          <CnTowerChevron class="chevron" />
+          <div class="blue-triangle">
             <svg
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >
               <polygon
-                points="50,100 0,0 100,0"
-                style="fill: #b42f2b"
+                points="50,0 100,100 -25,150"
+                style="fill: rgba(0, 150, 227, 0.7)"
               />
             </svg>
           </div>
-        </div>
-        <CnTowerChevron class="chevron" />
-        <div class="blue-triangle">
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
+          <img
+            src="/img/tbo-hero.png"
+            class="tbo-hero"
           >
-            <polygon
-              points="50,0 100,100 -25,150"
-              style="fill: rgba(0, 150, 227, 0.7)"
-            />
-          </svg>
+          <div class="simple-nav">
+            <NuxtLink
+              to="login"
+              class="front-button hidden"
+            >
+              Log In
+            </NuxtLink>
+          </div>
+          <nuxt-link to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform">
+            <button
+              class="join-button hover:bg-red-800 bg-red-700 mt-36 text-white font-bold py-2 px-4 rounded-full shadow"
+            >
+              Join Take Back Ontario
+            </button>
+          </nuxt-link>
         </div>
-        <img
-          src="/img/tbo-hero.png"
-          class="tbo-hero"
-        >
-        <div class="simple-nav">
-          <NuxtLink
-            to="login"
-            class="front-button hidden"
-          >
-            Log In
-          </NuxtLink>
-        </div>
-        <nuxt-link to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform">
-          <button
-            class="join-button hover:bg-red-800 bg-red-700 mt-36 text-white font-bold py-2 px-4 rounded-full shadow"
-          >
-            Join Take Back Ontario
-          </button>
-        </nuxt-link>
       </div>
       <div />
       <div class="page-body-wrapper">
@@ -64,7 +66,7 @@
             province, things are only going to get worse.
           </p>
           <h2
-            class="mb-1 mt-10 text-center text-2xl md:text-5xl max-w-5xl ml-0 mr-auto"
+            class="mb-1 mt-10 text-center text-2xl md:text-5xl max-w-5xl ml-auto mr-auto"
             style="color: #b42f2b"
           >
             The world is run by those who show&nbsp;up
@@ -168,7 +170,7 @@ import CnTowerChevron from "~/components/CnTowerChevron.vue";
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) translateY(50%);
-  z-index: 10;
+  z-index: 1000;
 }
 
 .blue-triangle-separator {

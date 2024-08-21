@@ -1,11 +1,11 @@
 <template>
-  <!-- <div class="bg-white shadow">
-    <a
+  <div class="bg-white shadow">
+    <!-- <a
       v-if="authStore.isAuthenticated"
       href="#"
       @click.prevent="authStore.signOutUser"
-    >Sign Out</a>
-  </div> -->
+    >Sign Out</a> -->
+  </div>
 </template>
 
 <script setup>

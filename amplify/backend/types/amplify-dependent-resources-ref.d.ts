@@ -9,5 +9,12 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "geo": {
+    "tboPlaceIndexDev": {
+      "Arn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
   }
 }

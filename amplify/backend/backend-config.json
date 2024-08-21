@@ -26,5 +26,24 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "geo": {
+    "tboPlaceIndexDev": {
+      "accessType": "AuthorizedUsers",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "takebackontarionuxte51adf3ee51adf3e"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
+    }
   }
 }

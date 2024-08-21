@@ -22,5 +22,16 @@
   },
   "aws_cognito_verification_mechanisms": [
     "EMAIL"
-  ]
+  ],
+  "geo": {
+    "amazon_location_service": {
+      "region": "us-east-1",
+      "search_indices": {
+        "items": [
+          "tboPlaceIndexDev-dev"
+        ],
+        "default": "tboPlaceIndexDev-dev"
+      }
+    }
+  }
 }

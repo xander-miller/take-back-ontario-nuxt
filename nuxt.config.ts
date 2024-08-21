@@ -1,23 +1,15 @@
-var neo4jUri = process.env.NEO4J_URI || 'neo4j://localhost:7999';
-var neo4jUsername=process.env.NEO4J_USERNAME || 'neo4j';
-var neo4jPassword=process.env.NEO4J_PASSWORD ||  'password';
-
 export default defineNuxtConfig({
-  // Modules
-  modules: [
-    "@nuxt/content",
-    "@nuxtjs/tailwindcss",
-    "nuxt-neo4j",
-  ],
-  neo4j: {
-    uri: neo4jUri, 
-    auth: {
-      type: 'basic',
-      username: neo4jUsername,
-      password: neo4jPassword,
-    },
+  app: {
+    head: {
+      script: [
+      ]
+    }
   },
- 
+  // Modules
+  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", '@pinia/nuxt', "@nuxt/image"],
+  buildModules:[
+    "@nuxtjs/dotenv"
+  ],
   vite: {
     optimizeDeps: {
       exclude: ['fsevents']
@@ -73,4 +65,8 @@ export default defineNuxtConfig({
   alias: {
     './runtimeConfig': './runtimeConfig.browse'
   },
+  plugins: [
+    { src: '~/plugins/amplify.js', mode: 'client' },
+    { src: '~/plugins/client-only-script.js', mode: 'client' }
+  ]
 });

@@ -12,8 +12,8 @@ console.log(signIn, initialAuthState);
 		signUp:{
 			'custom:referral_code': {
 				label: 'Referral Code',
-				placeholder: 'Enter a referral code, if you have one',
-				isRequired: false,
+				placeholder: 'Enter a referral code',
+				isRequired: true,
 			},
 		}
 	};

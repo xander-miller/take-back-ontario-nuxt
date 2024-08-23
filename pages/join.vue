@@ -23,7 +23,7 @@
         <template #sign-up-fields>
           <form class="w-full">
             <FormInput
-              v-for="field in formFields"
+              v-for="field in nonCheckboxFormFields"
               :id="field.id"
               :key="field.id"
               v-model="field.value"
@@ -44,7 +44,6 @@
                   class="mr-2 leading-tight appearance-none"
                   type="checkbox"
                   name="custom:riding_contact"
-                  checked
                 >
                 <span class="text-sm w-full font-bold">
                   Other members in my riding may see my name and contact information (recommended)
@@ -140,16 +139,19 @@ const formFields = ref([
     blur: false
   },
   {
-    required: true,
+    required: false,
     id: 'riding-contact',
     type: 'checkbox',
     name: 'custom:riding_contact',
-    label: 'I agree that others in my riding can contact me (recommended).',
     error: '',
-    value: '',
-    blur: false
+    value: '' ,
+    blur: false,
   }
 ]);
+
+const nonCheckboxFormFields = computed(()=>{
+ return formFields.value.filter((i)=> i.type !== 'checkbox')
+})
 
 const authenticatorFormFields = computed(() => {
   const returnObject = { signUp: {}};

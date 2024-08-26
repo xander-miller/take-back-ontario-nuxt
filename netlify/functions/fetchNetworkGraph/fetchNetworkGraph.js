@@ -70,7 +70,8 @@ export const handler = async (event) => {
       ];
 
       relationshipsToAdd.forEach(rel => {
-        if (rel.source && rel.target) {
+        if (rel.source && rel.target && !relationships.some(existingRel =>
+            existingRel.data.source === rel.source && existingRel.data.target === rel.target && existingRel.data.type === rel.type)) {
           relationships.push({ data: { source: rel.source, target: rel.target, type: rel.type } });
         }
       });

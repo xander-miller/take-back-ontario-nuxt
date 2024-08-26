@@ -72,7 +72,7 @@ onMounted(() => {
               'outline-color': '#0096e3',
               'outline-width': '5px',
               'outline-opacity': 1,
-              'label': 'data(name)',
+              'label': 'data(id)',
               'font-size': '12px',
               'text-halign': 'center',
               'text-background-color': '#fff',

@@ -16,6 +16,8 @@
     "@aws-amplify/ui-vue": "^4.2.5",
     "@aws-sdk/client-location": "^3.590.0",
     "@aws/amazon-location-utilities-auth-helper": "^1.0.6",
+    "@headlessui/vue": "^1.7.22",
+    "@heroicons/vue": "^2.1.5",
     "@nuxt/content": "^2.12.1",
     "@nuxt/image": "^1.7.0",
     "@pinia/nuxt": "^0.5.1",

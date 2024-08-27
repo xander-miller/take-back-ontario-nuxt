@@ -40,13 +40,7 @@
               Log In
             </NuxtLink>
           </div>
-          <nuxt-link to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform">
-            <button
-              class="join-button hover:bg-red-800 bg-red-700 mt-36 text-white font-bold py-2 px-4 rounded-full shadow"
-            >
-              Join Take Back Ontario
-            </button>
-          </nuxt-link>
+          <TboSignUp />
         </div>
       </div>
       <div />
@@ -124,16 +118,7 @@
           </p>
           <div class="max-w-4xl text-center text-2xl md:text-3xl font-medium mr-auto ml-auto pb-24 z-10">
             I'm ready to show up!
-            <nuxt-link
-              class="text-center text-base hover:no-underline"
-              to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform"
-            >
-              <button
-                class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow !relative !block !transform-none !left-auto !bottom-auto mt-6 mr-auto ml-auto text"
-              >
-                Join Take Back Ontario
-              </button>
-            </nuxt-link>
+          <TboSignUp />
           </div>
         </div>
         <div class="blue-triangle-separator">

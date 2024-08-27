@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindTypography from '@tailwindcss/typography'
 import withMT from "@material-tailwind/html/utils/withMT";
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 
 module.exports = withMT({
 theme: {
@@ -12,7 +14,10 @@ theme: {
       tbored: {
         DEFAULT: '#b6362d'
       }
-    }
+    },
+    fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
   }
 },
   corePlugins: {

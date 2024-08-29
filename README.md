@@ -75,6 +75,11 @@ Start the development server on `http://localhost:3000`:
 npm run dev
 ```
 
+### New sign up flow development
+
+If you would like to develop the new sign up flow please add `NEW_SIGN_UP="true"` to your `.env` file.
+You will need to restart `npm run dev` if it is already running.
+
 ## Neo4j
 
 Neo4j queries should be run in netlify functions to avoid exposing the credentials to the front end.

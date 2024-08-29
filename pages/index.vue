@@ -40,7 +40,7 @@
               Log In
             </NuxtLink>
           </div>
-          <nuxt-link to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform">
+          <nuxt-link :to="link">
             <button
               class="join-button hover:bg-red-800 bg-red-700 mt-36 text-white font-bold py-2 px-4 rounded-full shadow"
             >
@@ -126,7 +126,7 @@
             I'm ready to show up!
             <nuxt-link
               class="text-center text-base hover:no-underline"
-              to="https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform"
+              :to="link"
             >
               <button
                 class="join-button hover:bg-red-800 bg-red-700 text-white font-bold py-2 px-4 rounded-full shadow !relative !block !transform-none !left-auto !bottom-auto mt-6 mr-auto ml-auto text"
@@ -154,6 +154,12 @@
 
 <script setup>
 import CnTowerChevron from "~/components/CnTowerChevron.vue";
+const runtimeConfig = useRuntimeConfig()
+
+const newSignUpMode = runtimeConfig.public.NEW_SIGN_UP
+
+const link = newSignUpMode == "true" ? "/join": "https://docs.google.com/forms/d/e/1FAIpQLSc81gpDidaxKx8Mciv4Dr3oo0DjrdpNlCfcvGjDZp3mAlpW0g/viewform"
+
 </script>
 
 <style>

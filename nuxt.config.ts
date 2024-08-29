@@ -68,5 +68,8 @@ export default defineNuxtConfig({
   plugins: [
     { src: '~/plugins/amplify.js', mode: 'client' },
     { src: '~/plugins/client-only-script.js', mode: 'client' }
-  ]
+  ],
+  runtimeConfig: {
+    public: { NEW_SIGN_UP: process.env.NEW_SIGN_UP, }
+  },
 });

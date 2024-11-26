@@ -2,9 +2,8 @@
   <TboBackground class="w-full">
     <h1>CODES PAGE</h1>
 
-    
     <TboButton
-      @click="generateNewReferralCode"
+      @click="userStore.generateReferralCode"
     >
       Generate a new referral code
     </TboButton>
@@ -31,12 +30,14 @@
 </template>
 
 <script setup>
-  var codes = ref([])
-  function generateNewReferralCode() {
-    // TODO:get a referral code that is unique
+  import { useUserStore } from '~/store/user';
+  definePageMeta({
+    middleware: 'auth'
+  });
+  var codes = ref([]);
+  const userStore = useUserStore();
+  console.log(userStore.isAuthenticated)
 
-    codes.value.push([null, makeRandomCode(8)]);
-  }
   function makeRandomCode(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

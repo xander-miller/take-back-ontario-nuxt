@@ -57,8 +57,7 @@ const handler = async function (event) {
 
   
   // TODO: Eventually we may want to retry this multiple times until we hit a code that doesn't exist.
-  // const newCode = _createRandomCode();
-  const newCode =  'ABC-789'
+  const newCode = _createRandomCode();
 
   try {
     // Check if referral code exists

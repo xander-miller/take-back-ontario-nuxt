@@ -4,7 +4,6 @@ import { getNeo4jSession } from '../getNeo4jSession.js';
 const handler = async function (event) {
   let decodedJwt = null;
   let eventBody = null;
-  console.log('Event:', event)
   // Validate and decode the JWT - pass function event.
 
   try {
@@ -21,7 +20,6 @@ const handler = async function (event) {
 
   try {
     eventBody = JSON.parse(event.body);
-    console.log('Event body:', eventBody);
   } catch (error) {
     return {
       statusCode: 400,
@@ -40,31 +38,11 @@ const handler = async function (event) {
 
   try {
     const { email, referredByCode, id, emailVerified, phone, name } = eventBody;
-    // Check if referral code exists
-    console.log(`Checking if referral code exists: ${referredByCode}`);
-    const referralResult = await session.run(
-      'MATCH (referrer:User) WHERE $referredByCode IN referrer.referralCodes RETURN referrer',
-      { referredByCode }
-    );
 
-    if (referralResult.records.length === 0) {
-      console.log(`Referral code ${referredByCode} not found`);
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ error: 'Referral code not found' }),
-      };
-    }
-
-    const referrer = referralResult.records[0].get('referrer');
-    console.log('Referrer found:', referrer.properties);
-
-    // Extract necessary properties from the referrer
-    const referrerId = referrer.properties.id;
 
     // Create new user and connect with referrer
-    const createUserQuery = `
-      MATCH (referrer:User {id: $referrerId})
-      CREATE (newUser:User {
+    var createUserQuery = `
+      CREATE (user:User {
         id: $id,
         name: $name,
         email: $email,
@@ -73,30 +51,68 @@ const handler = async function (event) {
         joined: datetime(),
         emailVerified: $emailVerified
       })
-      CREATE (referrer)-[:REFERS {referralCode: $referredByCode, notes: '', dateOfReferral: datetime(), lastContact: datetime(), preferredContactMethod: ''}]->(newUser)
-      CREATE (referrer)-[:FRIENDS {becameFriends: datetime()}]->(newUser)
-      CREATE (newUser)-[:FRIENDS {becameFriends: datetime()}]->(referrer)
-      RETURN newUser
+
+      RETURN user
     `;
 
-    console.log(`Creating new user with ID: ${id}`);
-    const createUserResult = await session.run(createUserQuery, {
+    const opts = {
       id,
       name,
       email,
       phone,
       referredByCode,
-      referrerId,
       emailVerified,
-    });
+    };
+    console.log(`Creating new user with CYPHER: ${createUserQuery}\nOPTS: ${JSON.stringify(opts,null,2)}`);
+    const createUserResult = await session.run(createUserQuery, opts);
 
-    const newUser = createUserResult.records[0].get('newUser');
+
+    const newUser = createUserResult.records[0].get('user');
+
+    var referralCreated = false;
+    if(referredByCode) {
+      try
+      {
+        var createReferralsQuery = `
+          MATCH(user:User{id: $id})
+          MATCH(referralCode:ReferralCode{code: $referredByCode })
+          MATCH(referralCode)<-[:OWNS]-(referrer:User)
+
+
+          CREATE (referrer)-[:REFERRED {referralCode: referralCode.code, notes: '', dateOfReferral: datetime(), lastContact: datetime(), preferredContactMethod: ''} ]->(user)
+          CREATE (user)-[:REFERRED_BY {referralCode: referralCode.code, notes: '', dateOfReferral: datetime(), lastContact: datetime(), preferredContactMethod: ''}]->(referrer)
+
+          return user, referralCode
+        `;
+      const opts = {
+        id,
+        referredByCode,
+      };
+      console.log(`Creating referral relationship with CYPHER: ${createReferralsQuery}\nOPTS: ${JSON.stringify(opts,null,2)}`);
+      const referralResult = await session.run(createReferralsQuery, opts);
+
+      const newUser = referralResult.records[0].get('user');
+      const referralCode = referralResult.records[0].get('referralCode')
+      if(referralCode){
+        referralCreated = true;
+      } 
+
+      } catch (error) {
+        console.error('Error creating referral:', error);
+        return {
+          statusCode: 500, // Changed to 500 to indicate an internal server error
+          body: JSON.stringify({ error: 'An error occurred while creating the referral' }),
+        };
+
+      }
+    }
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         message: 'User created successfully',
         user: newUser.properties,
+        referralCreated,
       }),
     };
   } catch (error) {

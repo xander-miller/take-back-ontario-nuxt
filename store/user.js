@@ -204,6 +204,25 @@ export const useUserStore = defineStore('user', () => {
     const networkData = await response.json();
     return networkData;
   };
+
+  const generateReferralCode = async () => {
+    const response = await fetch('/.netlify/functions/generateReferralCode', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jwt: jwt.value })
+    });
+
+    if (response.status === 404) {
+      console.log('Network not found in Neo4j');
+      return null;
+    }
+
+    if (!response.ok) {
+      console.error('Failed to fetch network from Neo4j', response.status);
+    }
+    const networkData = await response.json();
+    return networkData;
+  };
   
 
   // Update the user data in Neo4j. Takes a user object.
@@ -238,6 +257,7 @@ export const useUserStore = defineStore('user', () => {
     setCanContact,
     setReferredByCode,
     initializeUser,
-    fetchNetworkFromNeo4j
+    fetchNetworkFromNeo4j,
+    generateReferralCode
   };
 });
